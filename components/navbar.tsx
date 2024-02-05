@@ -1,10 +1,11 @@
 "use client";
 import { useState, useEffect } from "react";
 import { Button } from "./ui/button";
-import { Menu } from "lucide-react";
+import { Menu, UserRoundCheck } from "lucide-react";
 import MobileSidebar from "./mobile-sidebar";
 import { Inter } from "next/font/google";
-import { FilePen } from 'lucide-react';
+import Link from "next/link";
+
 
 const Navbar = () => {
     const [isLargeScreen, setIsLargeScreen] = useState(false);
@@ -34,8 +35,9 @@ const Navbar = () => {
             <div className={isLargeScreen ? "block" : "hidden md:block"}>
                 {isLargeScreen ? (
                     <Button variant="ghost" size="icon">
-                        <FilePen />
+                        <UserRoundCheck />
                     </Button>
+
                 ) : (
                     <Menu />
                 )}

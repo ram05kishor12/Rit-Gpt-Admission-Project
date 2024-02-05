@@ -23,10 +23,12 @@ function sidebar() {
             </div>
             <div className="text-white text-2xl font-bold py-2">
                 <Button className=' w-56  animate-fade-in hover:transform hover:scale-105 transition-transform text-white hover:bg-blue-950 shadow-lg bg-blue-600'>
+                        <Link href="/">
                     <div className=' flex gap-1 text-lg'>
                         <Plus className='w-5 h-7' />
                         New Chat
                     </div>
+                        </Link>
                 </Button>
             </div>
             <div className="p-2.5 mt-3 flex items-center rounded-md px-4 duration-300">
