@@ -17,11 +17,7 @@ const montserrat = Poppins({
 
 function sidebar() {
     return (
-<<<<<<< HEAD
-        <div className="sidebar h-screen w-[300px] overflow-y-auto text-center bg-gray-100 shadow-sm">
-=======
-        <div className="sidebar h-screen w-[300px]  overflow-y-auto text-center bg-slate-950 ">
->>>>>>> 7774c75640955e3724c1b4dcab1eab1d73598c12
+        <div className="sidebar h-screen w-[300px] overflow-y-auto text-center bg-white shadow-sm">
             <Image className='mx-5 mt-5 rounded-md' src={Logo} alt="logo" width={250} height={300} />
             <div className="bg-gray-200 h-[0.5px] w-[300px] my-5">
             </div>
@@ -63,9 +59,9 @@ function sidebar() {
                     <i className="bi bi-house-door-fill"></i>
                     <a href="https://www.ritchennai.org" className="flex gap-2 text-[13px] ml-4 text-black font-medium"><Globe className='w-5 h-7' /> ritchennai.org </a>
                 </div>
+                </div>
 
             </div>
-        </div>
 
     )
 }
