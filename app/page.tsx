@@ -3,6 +3,7 @@ import Sidebar from "@/components/sidebar";
 // import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { SendHorizontal } from 'lucide-react';
+import { Card } from "../components/ui/card";
 
 
 const Home: React.FC = () => {
@@ -11,9 +12,14 @@ const Home: React.FC = () => {
   return (
     <div className="flex bg-gray-200 h-screen">
       <div className="flex flex-col flex-grow ">
+
+        <div className="flex justify-center mt-8">
+          <Card className="lg:w-[800px] h-[500px] bg-gray-100 bg-transparent shadow-lg sm:w-[400px]">
+          </Card>
+        </div>
         <div className="flex-grow"></div>
         <div className="flex justify-center">
-          <div className="flex w-full max-w-3xl mb-24 px-5">
+          <div className="flex w-full max-w-3xl mb-24 px-4">
             <input
               type="text"
               id="first_name"
@@ -21,7 +27,7 @@ const Home: React.FC = () => {
               placeholder="TYPE YOUR MESSAGE"
               required
             />
-            <Button className="ml-2"><SendHorizontal className="w-5 h-6" /></Button>
+            <Button className="ml-2  bg-blue-600 rounded-xl "><SendHorizontal className="w-5 h-6" /></Button>
           </div>
         </div>
       </div>

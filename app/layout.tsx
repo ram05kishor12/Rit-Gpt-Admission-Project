@@ -1,10 +1,10 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Inter, Poppins } from "next/font/google";
 import "./globals.css";
 import Sidebar from "../components/sidebar";
 import Navbar from "../components/navbar";
 
-const inter = Inter({ subsets: ["latin"] });
+const inter = Poppins({ weight: "400", subsets: ['devanagari'] });
 
 export const metadata: Metadata = {
   title: "Create Next App",
