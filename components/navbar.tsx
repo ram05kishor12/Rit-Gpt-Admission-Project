@@ -27,7 +27,7 @@ const Navbar = () => {
     }, []);
 
     return (
-        <div className="flex items-center justify-between bg-gray-100 p-4 shadow-lg">
+        <div className="flex items-center justify-between bg-gray-50 p-4 shadow-lg">
             <MobileSidebar />
             <div className="flex items-center justify-center md:justify-start w-full md:w-auto">
                 <h1 className="text-2xl text-slate-900 font-semibold">CHAT <span className="text-blue-600">AI</span></h1>
