@@ -1,18 +1,16 @@
 "use server"
 
 import { Pinecone } from '@pinecone-database/pinecone';
-import { get } from 'http';
-import { getEmbeddings } from '../openai/route';
-import { vectorse } from '../pinecone/constants';
+import { getEmbeddings } from '../embeddings/route';
 
 const pc = new Pinecone({ apiKey: process.env.PINECONE_API_KEY as string })
 const index = pc.index("chat-pdf")
 const namespace = index.namespace("ns1");
 
-export async function match() {
+export async function match(question:string) {
     try {
 
-        const vectors = await getEmbeddings("when did krishna killed naragasura?");
+        const vectors = await getEmbeddings(question);
         // try {
         //     const result = await namespace.upsert([{ "id": "3", "values": vectors }]);
         //     console.log("done" + result);
