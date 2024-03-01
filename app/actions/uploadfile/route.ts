@@ -2,10 +2,10 @@
 
 "use server";
 
-import { GetObjectCommand, S3Client } from "@aws-sdk/client-s3";
-import { getEmbeddings } from "../openai/route";
+import { GetObjectCommand} from "@aws-sdk/client-s3";
+import { getEmbeddings } from "../embeddings/route";
 import { Pinecone } from "@pinecone-database/pinecone";
-import { embeddings } from "../pinecone/constants";
+import { S3Client } from "@aws-sdk/client-s3";
 
 const pc = new Pinecone({ apiKey: process.env.PINECONE_API_KEY as string });
 const index = pc.index("chat-pdf");
