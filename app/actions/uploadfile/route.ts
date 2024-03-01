@@ -2,7 +2,7 @@
 
 "use server";
 
-import { GetObjectCommand} from "@aws-sdk/client-s3";
+import { GetObjectCommand,PutObjectCommand} from "@aws-sdk/client-s3";
 import { getEmbeddings } from "../embeddings/route";
 import { Pinecone } from "@pinecone-database/pinecone";
 import { S3Client } from "@aws-sdk/client-s3";
@@ -32,10 +32,25 @@ function split(str: string, chunksize: number) {
     return chunks;
 }
 
-export async function getstring() {
+export async function getstring(formdata: FormData) {
+    const file= formdata.get("file") as File;
+
+    const commands = new PutObjectCommand({
+        Bucket: "chat-pdf-rk",
+        Key: `uploads/${file.name}`,
+        Body: file,
+    });
+    try{
+        const response = await client.send(commands);
+        console.log(response);
+    }
+    catch(err){
+        console.error(err);
+    }
+
     const command = new GetObjectCommand({
         Bucket: "chat-pdf-rk",
-        Key: "uploads/demo3.txt",
+        Key: `uploads/${file.name}`,
     });
 
     try {
