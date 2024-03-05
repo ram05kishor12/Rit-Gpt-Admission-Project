@@ -30,7 +30,7 @@ const Navbar = () => {
         <div className="flex items-center justify-between bg-gray-100 p-4 shadow-lg">
             <MobileSidebar />
             <div className="flex items-center justify-center md:justify-start w-full md:w-auto">
-                <h1 className="text-2xl text-slate-900 font-semibold">CHAT <span className="text-blue-600">AI</span></h1>
+                <h1 className="text-2xl text-slate-900 font-semibold">RIT <span className="text-blue-600">GPT</span></h1>
             </div>
             <div className={isLargeScreen ? "block" : "hidden md:block"}>
                 {isLargeScreen ? (
