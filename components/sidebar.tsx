@@ -17,7 +17,7 @@ const montserrat = Poppins({
 
 function sidebar() {
   return (
-    <div className="sidebar h-screen w-[300px] overflow-y-auto text-center bg-gray-100   shadow-sm">
+    <div className="sidebar h-screen w-[300px] overflow-y-auto text-center bg-zinc-100   shadow-sm">
       <Image
         className="mx-5 mt-5 rounded-md"
         src={Logo}

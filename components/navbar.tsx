@@ -27,22 +27,26 @@ const Navbar = () => {
     }, []);
 
     return (
-        <div className="flex items-center justify-between bg-gray-50 p-4 shadow-lg">
-            <MobileSidebar />
-            <div className="flex items-center justify-center md:justify-start w-full md:w-auto">
-                <h1 className="text-2xl text-slate-900 font-semibold">RIT <span className="text-blue-600">GPT</span></h1>
-            </div>
-            <div className={isLargeScreen ? "block" : "hidden md:block"}>
-                {isLargeScreen ? (
-                    <Button variant="ghost" size="icon">
-                        <UserRoundCheck />
-                    </Button>
+        <>
+            <div className="flex items-center  bg-white p-2 shadow-lg">
+                <MobileSidebar />
+                <div className="flex justify-center md:justify-start xl:justify-start lg:justify-start w-full md:w-auto">
+                    <h1 className=" flex text-2xl px-5 text-slate-900 font-semibold">RIT <span className="text-blue-600 px-2">GPT</span></h1>
+                </div>
+                <div className={isLargeScreen ? "flex justify-end w-full" : "hidden md:block"}>
+                    {isLargeScreen ? (
+                        <Button variant="ghost" size="icon">
+                            <UserRoundCheck />
+                        </Button>
 
-                ) : (
-                    <Menu />
-                )}
+                    ) : (
+                        <Menu />
+                    )}
+                </div>
             </div>
-        </div>
+            <div className="bg-gray-200 h-[0.7px] w-full"></div>
+        </>
+
     );
 };
 
