@@ -24,7 +24,6 @@ function sidebar() {
         alt="logo"
         width={250}
         height={300}
-        
       />
       <div className="bg-gray-200 h-[0.5px] w-[300px] my-3"></div>
       <div className="text-white text-2xl font-bold py-2">
@@ -82,7 +81,7 @@ function sidebar() {
           <i className="bi bi-house-door-fill"></i>
           <a
             href="https://www.ritchennai.org"
-            className="flex gap-2 text-[13px] ml-4 text-black  font-medium"
+            className="flex gap-2 text-[13px] ml-4 text-black font-medium"
           >
             <Globe className="w-5 h-7" /> ritchennai.org{" "}
           </a>
