@@ -31,9 +31,9 @@ const Navbar = () => {
             <div className="flex items-center  bg-white p-2 shadow-lg">
                 <MobileSidebar />
                 <div className="flex justify-center md:justify-start xl:justify-start lg:justify-start w-full md:w-auto">
-                    <h1 className=" flex text-2xl px-5 text-slate-900 font-semibold">RIT <span className="text-blue-600 px-2">GPT</span></h1>
+                    <h1 className=" flex text-2xl mx-10 text-slate-900 font-semibold">RIT <span className="text-blue-600 px-2">GPT</span></h1>
                 </div>
-                <div className={isLargeScreen ? "flex justify-end w-full" : "hidden md:block"}>
+                <div className={isLargeScreen ? "flex justify-end w-full mr-10" : "hidden md:block"}>
                     {isLargeScreen ? (
                         <Button variant="ghost" size="icon">
                             <UserRoundCheck />
@@ -44,7 +44,7 @@ const Navbar = () => {
                     )}
                 </div>
             </div>
-            <div className="bg-gray-200 h-[0.7px] w-full"></div>
+            <div className="bg-gray-300 h-[0.7px] w-full"></div>
         </>
 
     );
