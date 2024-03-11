@@ -32,7 +32,7 @@ export async function match(question:string) {
         type Metadata = {
             data: string;
         };
-        const qualify = queryResponse.matches.filter((match) => match.score && match.score > 0.7);
+        const qualify = queryResponse.matches.filter((match) => match.score && match.score > 0.73);
 
         const content = qualify.map((match) => (match.metadata as Metadata));
 
