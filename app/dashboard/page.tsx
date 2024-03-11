@@ -15,7 +15,8 @@ import rit from "../../components/rit.png";
 import { useChat } from "ai/react";
 
 const Home: React.FC = () => {
-    const { messages, input, handleInputChange, handleSubmit } = useChat({ api: "../api/getresponse" });
+    const { messages, input, handleInputChange, handleSubmit, isLoading, stop } =
+        useChat({ api: "../api/getresponse" });
 
     return (
         <div className="flex  h-screen  ">
@@ -26,7 +27,11 @@ const Home: React.FC = () => {
                             className="overflow-y-auto h-[600px] mt-8"
                             style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
                         >
-                            <div className={cn("p-8 w-full flex flex-col items-center rounded-lg")}>
+                            <div
+                                className={cn(
+                                    "p-8 w-full flex flex-col items-center rounded-lg"
+                                )}
+                            >
                                 {messages.map((message, index) => (
                                     <div className="flex flex-col w-full" key={index}>
                                         <div className=" flex flex-col mb-8 ">
@@ -49,7 +54,12 @@ const Home: React.FC = () => {
                                                         </svg>
                                                     ) : (
                                                         <div className="flex ">
-                                                            <Image src={rit} alt="RIT" width={30} height={20} />
+                                                            <Image
+                                                                src={rit}
+                                                                alt="RIT"
+                                                                width={30}
+                                                                height={20}
+                                                            />
                                                             <p className="text-md ml-2">RITGPT</p>
                                                         </div>
                                                     )}
@@ -58,7 +68,9 @@ const Home: React.FC = () => {
                                                     </p>
                                                 </div>
                                                 <div className="flex flex-col">
-                                                    <p className="text-sm ml-10">{message.content}</p>
+                                                    <p className="text-sm ml-10">
+                                                        {message.content}
+                                                    </p>
                                                 </div>
                                             </div>
                                         </div>
@@ -72,7 +84,10 @@ const Home: React.FC = () => {
                 <div className="flex-grow"></div>
                 <div className="flex justify-center ">
                     <div className="flex w-full max-w-4xl  px-7">
-                        <form className="flex w-full max-w-4xl mb-24 px-7" onSubmit={handleSubmit}>
+                        <form
+                            className="flex w-full max-w-4xl mb-24 px-7"
+                            onSubmit={handleSubmit}
+                        >
                             <input
                                 type="text"
                                 id="first_name"
