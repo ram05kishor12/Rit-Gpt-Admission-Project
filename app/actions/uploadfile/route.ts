@@ -1,8 +1,6 @@
-
-
 "use server";
 
-import { GetObjectCommand,PutObjectCommand} from "@aws-sdk/client-s3";
+import { GetObjectCommand, PutObjectCommand } from "@aws-sdk/client-s3";
 import { getEmbeddings } from "../embeddings/route";
 import { Pinecone } from "@pinecone-database/pinecone";
 import { S3Client } from "@aws-sdk/client-s3";
@@ -18,33 +16,48 @@ const client = new S3Client({
         secretAccessKey: process.env.NEXT_PUBLIC_AWS_SECRET_ACCESS_KEY as string,
     },
 });
-function split(str: string, chunksize: number) {
+function split(str: string, chunkSize: number) {
     const chunks = [];
-    let pointer = 0;
-    while (pointer < str.length) {
-        let endindex = pointer + chunksize;
-        while (endindex > pointer && str[endindex - 1] !== ".") {
-            endindex--;
+    let currentChunk = "";
+    let currentLength = 0;
+    const sentences = str.split(".");
+
+    for (const sentence of sentences) {
+        const trimmedSentence = sentence.trim();
+        if (currentLength + trimmedSentence.length + 1 <= chunkSize) {
+            currentChunk += trimmedSentence + ".";
+            currentLength += trimmedSentence.length + 1;
+        } else {
+            chunks.push(currentChunk);
+            currentChunk = trimmedSentence + ".";
+            currentLength = trimmedSentence.length + 1;
         }
-        chunks.push(str.substring(pointer, endindex).trim());
-        pointer = endindex;
+        if (currentLength >= chunkSize) {
+            chunks.push(currentChunk);
+            currentChunk = "";
+            currentLength = 0;
+        }
+    }
+    if (currentChunk.trim() !== "") {
+        chunks.push(currentChunk);
     }
     return chunks;
 }
 
 export async function getstring(formdata: FormData) {
-    const file= formdata.get("file") as File;
+    const file = formdata.get("file") as File;
+    const blob = new Blob([file], { type: "text/plain" });
+    const buffer = Buffer.from(await blob.arrayBuffer());
 
     const commands = new PutObjectCommand({
         Bucket: "chat-pdf-rk",
         Key: `uploads/${file.name}`,
-        Body: file,
+        Body: buffer,
     });
-    try{
+    try {
         const response = await client.send(commands);
         console.log(response);
-    }
-    catch(err){
+    } catch (err) {
         console.error(err);
     }
 
@@ -66,12 +79,13 @@ export async function getstring(formdata: FormData) {
             console.log(embedding);
             try {
                 await namespace.upsert([
-                    { id: "5", values: embedding, metadata: { data: chunk } },
+                    { id: "9", values: embedding, metadata: { data: chunk } },
                 ]);
                 console.log("done");
             } catch (error) {
                 console.log("error occured" + error);
             }
+            console.log("chunk:" + chunk);
         }
         return str;
     } catch (err) {

@@ -15,8 +15,8 @@ import rit from "../../components/rit.png";
 import { useChat } from "ai/react";
 
 const Home: React.FC = () => {
-    const { messages, input, handleInputChange, handleSubmit, isLoading, stop } =
-        useChat({ api: "../api/getresponse" });
+    const { messages, input, handleInputChange, handleSubmit, isLoading, stop } = useChat({ api: "../api/getresponse" });
+    
 
     return (
         <div className="flex  h-screen  ">
