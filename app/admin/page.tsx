@@ -1,29 +1,50 @@
+"use client"
 import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
+
 import { File } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import Link from "next/link";
 import { Card } from "@/components/ui/card";
 import Navbar from "@/components/navbar";
+import { useState, useEffect } from "react";
 import { getstring } from "../actions/uploadfile/route";
+
 import { app } from "../firebase/firebase";
-import { auth } from "../firebase/firebase";
-import { onAuthStateChanged } from "firebase/auth";
+import { onAuthStateChanged, getAuth, signOut } from "firebase/auth";
+import { useRouter } from "next/navigation";
 
 export default function Admin() {
+  const auth = getAuth(app);
+  const [loading, setLoading] = useState(true);
+  const Router = useRouter();
 
-  onAuthStateChanged(auth, (user) => {
-    if (user) {
-      // User is signed in, see docs for a list of available properties
-      // https://firebase.google.com/docs/reference/js/auth.user
-      const uid = user.uid;
-      console.log("user is signed in");
-      // ...
-    } else {
-      // User is signed out
-      // ..
-    }
-  });
+  useEffect(() => {
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      if (user) {
+        // User is signed in
+        console.log("user is signed in +3");
+      } else {
+        // User is signed out
+        console.log("user is not signed in +3");
+        Router.push("/")
+      }
+      setLoading(false);
+    });
+    return () => unsubscribe();
+  }, [auth]);
+
+  if (loading) {
+    return <div>Loading...</div>;
+  }
+
+  function signout() {
+    signOut(auth).then(() => {
+      console.log("user is signed out")
+      Router.push("/")
+    }).catch((error) => {
+      console.log("user is not signed out")
+    });
+  }
+
   return (
     <>
       <div className="h-5">
@@ -55,6 +76,11 @@ export default function Admin() {
               </Button>
             </div>
           </form>
+          <div className="flex justify-center">
+            <Button className="text-md" onClick={signout}>
+              Signout
+            </Button>
+          </div>
         </Card>
       </div>
     </>
