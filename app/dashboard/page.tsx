@@ -1,22 +1,17 @@
-// import Image from "next/image";
 "use client";
-import Sidebar from "@/components/sidebar";
-// import { Input } from "@/components/ui/input";
+
 import { Button } from "@/components/ui/button";
 import { SendHorizontal } from "lucide-react";
-import { Card } from "../../components/ui/card";
-import Link from "next/link";
-import { Loader } from "@/components/loader";
 import { cn } from "@/lib/utils";
-import { getresponse } from "../actions/response/route";
-import { useState } from "react";
 import Image from "next/image";
 import rit from "../../components/rit.png";
 import { useChat } from "ai/react";
+import { CircleSlash2 } from "lucide-react";
+
 
 const Home: React.FC = () => {
-    const { messages, input, handleInputChange, handleSubmit, isLoading, stop } = useChat({ api: "../api/getresponse" });
-    
+    const { messages, input, handleInputChange, handleSubmit, isLoading, stop } =
+        useChat({ api: "../api/getresponse" });
 
     return (
         <div className="flex  h-screen  ">
@@ -68,9 +63,7 @@ const Home: React.FC = () => {
                                                     </p>
                                                 </div>
                                                 <div className="flex flex-col">
-                                                    <p className="text-sm ml-10">
-                                                        {message.content}
-                                                    </p>
+                                                    <p className="text-sm ml-10">{message.content}</p>
                                                 </div>
                                             </div>
                                         </div>
@@ -101,7 +94,11 @@ const Home: React.FC = () => {
                                 type="submit"
                                 className="ml-2 mt-1  bg-blue-600 rounded-xl "
                             >
-                                <SendHorizontal className="w-5 h-6" />
+                                {isLoading ? (
+                                    <CircleSlash2 onClick={stop} className="w-5 h-6" />
+                                ) : (
+                                    <SendHorizontal className="w-5 h-6" />
+                                )}
                             </Button>
                         </form>
                     </div>
