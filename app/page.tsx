@@ -15,38 +15,38 @@ import { browserLocalPersistence, setPersistence, signInWithEmailAndPassword, ge
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import Navbar from "@/components/navbar";
-import { app } from "./firebase/firebase";
+import { app, db } from "./firebase/firebase";
+import { collection, getDocs } from "firebase/firestore";
+import { useToast } from "@/components/ui/use-toast";
 
 export default function Home() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const router = useRouter();
   const auth = getAuth(app);
+  const { toast } = useToast();
 
 
   async function login() {
-
-    setPersistence(auth, browserLocalPersistence);
-    const data = await signInWithEmailAndPassword(auth, email, password)
-      .then((userCredential) => {
-        // Signed in 
-        const user = userCredential.user;
-        console.log("user is signed in")
-        console.log(user);
-        router.push("/admin")
-        // ...
-      })
-      .catch((error) => {
-        const errorCode = error.code;
-        const errorMessage = error.message;
-        console.log("user is not signed in")
-        console.log(errorCode)
-        console.log(errorMessage)
-      });
+    const querySnapshot = await getDocs(collection(db, "allowlist"));
+    for (const doc of querySnapshot.docs) {
+      if (doc.data().person === email) {
+        try {
+          await setPersistence(auth, browserLocalPersistence);
+          await signInWithEmailAndPassword(auth, email, password);
+          console.log("User is signed in");
+          router.push("/admin");
+          return;
+        } catch (error: any) {
+          const errorCode = error.code;
+          const errorMessage = error.message;
+          console.error("Error signing in:", errorCode, errorMessage);
+          toast({ description: errorMessage, variant: "destructive" })
+        }
+      }
+    }
+    toast({ description: "you are not an administrator", variant: "destructive" })
   }
-
-
-
   return (
     <>
       <Navbar />
