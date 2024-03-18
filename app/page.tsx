@@ -28,24 +28,24 @@ export default function Home() {
 
 
   async function login() {
-    const querySnapshot = await getDocs(collection(db, "allowlist"));
-    for (const doc of querySnapshot.docs) {
-      if (doc.data().person === email) {
-        try {
-          await setPersistence(auth, browserLocalPersistence);
-          await signInWithEmailAndPassword(auth, email, password);
-          console.log("User is signed in");
-          router.push("/admin");
-          return;
-        } catch (error: any) {
-          const errorCode = error.code;
-          const errorMessage = error.message;
-          console.error("Error signing in:", errorCode, errorMessage);
-          toast({ description: errorMessage, variant: "destructive" })
-        }
-      }
+    // const querySnapshot = await getDocs(collection(db, "allowlist"));
+    // for (const doc of querySnapshot.docs) {
+    // if (doc.data().person === email) {
+    try {
+      await setPersistence(auth, browserLocalPersistence);
+      await signInWithEmailAndPassword(auth, email, password);
+      console.log("User is signed in");
+      router.push("/admin");
+
+    } catch (error: any) {
+      const errorCode = error.code;
+      const errorMessage = error.message;
+      console.error("Error signing in:", errorCode, errorMessage);
+      toast({ description: errorMessage, variant: "destructive" })
     }
-    toast({ description: "you are not an administrator", variant: "destructive" })
+    // }
+    // }
+    // toast({ description: "you are not an administrator", variant: "destructive" })
   }
   return (
     <>

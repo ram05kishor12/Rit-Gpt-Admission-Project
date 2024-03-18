@@ -14,10 +14,12 @@ import { useRouter } from "next/navigation";
 import { UserPlus } from 'lucide-react';
 import { Upload } from 'lucide-react';
 import { Label } from "@/components/ui/label";
-import { collection, addDoc } from "firebase/firestore";
+import { doc, setDoc, getDoc } from "firebase/firestore";
 import { useToast } from "@/components/ui/use-toast"
 import { db } from "../firebase/firebase";
 import logo from "../../components/rit.png";
+
+
 
 export default function Admin() {
   const auth = getAuth(app);
@@ -32,7 +34,11 @@ export default function Admin() {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       if (!user) {
         console.log("user is not signed in +3");
+      } else {
+
+        console.log("usseffect" + auth.currentUser?.uid);
       }
+
 
       setLoading(false);
     });
@@ -64,11 +70,23 @@ export default function Admin() {
   }
   async function addadmin() {
     try {
-      await createUserWithEmailAndPassword(auth, email, password);
-      await addDoc(collection(db, "allowlist"), {
-        person: email,
-      });
-      toast({ description: "Admin added", variant: "success" });
+
+
+      if (auth.currentUser != null) {
+        console.log("current uid" + auth.currentUser.uid);
+        console.log(auth.currentUser.email);
+        const data = await getDoc(doc(db, "allowlist", "CECgg7h8hKr4f2nqdvUd"));
+        console.log(data.data());
+        const persons = data.data()?.person;
+        console.log(persons);
+        await setDoc(doc(db, "allowlist", "CECgg7h8hKr4f2nqdvUd"), {
+          person: [...persons, email],
+        }, { merge: true });
+
+        await createUserWithEmailAndPassword(auth, email, password);
+
+        toast({ description: "Admin added", variant: "success" });
+      }
     } catch (error: any) {
       console.error("Error adding document: ", error);
       toast({ description: error.message, variant: "destructive" });
