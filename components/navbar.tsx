@@ -6,7 +6,6 @@ import MobileSidebar from "./mobile-sidebar";
 import { useRouter } from "next/navigation";
 
 
-
 function Navbar({ cont }: { cont: boolean }) {
     const [isLargeScreen, setIsLargeScreen] = useState(false);
     const router = useRouter();

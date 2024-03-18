@@ -7,11 +7,19 @@ import { Card } from "@/components/ui/card";
 import Navbar from "@/components/navbar";
 import { useState, useEffect } from "react";
 import { getstring } from "../actions/uploadfile/route";
-
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuGroup,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 import { app } from "../firebase/firebase";
 import { onAuthStateChanged, getAuth, signOut, createUserWithEmailAndPassword } from "firebase/auth";
 import { useRouter } from "next/navigation";
-import { UserPlus } from 'lucide-react';
+import { UserPlus, MenuIcon, LogOutIcon } from 'lucide-react';
 import { Upload } from 'lucide-react';
 import { Label } from "@/components/ui/label";
 import { doc, setDoc, getDoc } from "firebase/firestore";
@@ -19,6 +27,7 @@ import { useToast } from "@/components/ui/use-toast"
 import { db } from "../firebase/firebase";
 import logo from "../../components/rit.png";
 import Loadingbtn from "@/components/loadbtn";
+import { UserNav } from "@/components/dropdown";
 
 
 
@@ -100,12 +109,12 @@ export default function Admin() {
   return (
     <>
       <div className="h-5">
-        <Navbar cont={false} />
-      </div>
-      <div className="flex flex-col  md:flex-row ">
+        <Navbar cont={true} />
 
-        <div className=" flex  overflow-hidden   bg-zinc-100 border-r-2 h-screen p-3  lg:w-56 mt-10 md:w-1/3 ">
-          <div className="  flex flex-col px-3 h-screen">
+      </div>
+      <div className="flex flex-col">
+        {/* <div className=" flex  overflow-hidden   bg-zinc-100 border-r-2 h-screen p-3  lg:w-56 mt-10 md:w-1/3 "> */}
+        {/* <div className="  flex flex-col px-3 h-screen">
             <h1 className="text-2xl font-semibold mt-8 ml-4">Dashboard</h1>
             <div className="h-3/4 flex flex-col justify-between">
               <div>
@@ -124,8 +133,44 @@ export default function Admin() {
                 </Button>
               </div>
             </div>
-          </div>
-        </div>
+          </div> */}
+        <DropdownMenu>
+          <DropdownMenuTrigger asChild>
+            <MenuIcon className="w-5 h-5" />
+          </DropdownMenuTrigger>
+          <DropdownMenuContent className="w-56" align="end" forceMount>
+            <DropdownMenuGroup>
+              <DropdownMenuItem>
+                <span className="w-full flex justify-between items-center cursor-pointer">
+                  Add Admin
+                  <span onClick={() => setaction("addadmin")}>
+                    <UserPlus className="w-4 h-4" />
+                  </span>
+                </span>
+              </DropdownMenuItem>
+            <DropdownMenuItem>
+              <span className="w-full flex justify-between items-center cursor-pointer">
+                Upload
+                <span onClick={() => setaction("addfile")}>
+                  <Upload className="w-4 h-4" />
+                </span>
+              </span>
+            </DropdownMenuItem>
+            </DropdownMenuGroup>
+            <DropdownMenuSeparator />
+            <DropdownMenuGroup>
+              <DropdownMenuItem>
+                <span className="w-full flex justify-between items-center cursor-pointer">
+                  Logout
+                  <span onClick={() => signout()}>
+                    <LogOutIcon className="w-4 h-4" />
+                  </span>
+                </span>
+              </DropdownMenuItem>
+            </DropdownMenuGroup>
+          </DropdownMenuContent>
+        </DropdownMenu>
+        {/* </div> */}
 
         <div className="flex-1">
           <div className="flex justify-center items-center p-24">
