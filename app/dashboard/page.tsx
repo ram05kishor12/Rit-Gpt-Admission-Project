@@ -7,29 +7,78 @@ import Image from "next/image";
 import rit from "../../components/rit.png";
 import { useChat } from "ai/react";
 import { CircleSlash2 } from "lucide-react";
+import { useRef, useEffect } from "react";
 
 
 const Home: React.FC = () => {
     const { messages, input, handleInputChange, handleSubmit, isLoading, stop } =
         useChat({ api: "../api/getresponse" });
 
+    const chatContainerRef = useRef<HTMLDivElement>(null);
+
+    useEffect(() => {
+        // Scroll to the bottom of the chat container whenever messages change
+        if (chatContainerRef.current) {
+            chatContainerRef.current.scrollTop = chatContainerRef.current.scrollHeight;
+        }
+    }, [messages]);
+
+    const formatResponse = (response: string): JSX.Element => {
+        // Split the response into paragraphs based on double line breaks
+        const paragraphs: string[] = response.split("\n\n");
+
+        return (
+            <div>
+                {paragraphs.map((paragraph: string, index: number) => {
+                    if (paragraph.includes("**")) {
+                        // Check if the paragraph contains '**' to denote bold text
+                        // Split the paragraph based on '**' to get parts before, between, and after bold text
+                        const parts: string[] = paragraph.split("**");
+
+                        // Map over the parts to render them accordingly
+                        return (
+                            <p key={index}>
+                                {parts.map((part: string, i: number) => {
+                                    // If part index is odd, render it as bold text
+                                    if (i % 2 === 1) {
+                                        return <strong key={i}>{part}</strong>;
+                                    }
+                                    return part;
+                                })}
+                            </p>
+                        );
+                    } else if (paragraph.match(/^\d+\.\s/)) {
+                        // Check if the paragraph starts with a number followed by a dot and a space
+                        const lines: string[] = paragraph.split("\n");
+                        return (
+                            <ol key={index}>
+                                {lines.map((line, lineIndex) => (
+                                    <li key={lineIndex}>{line}</li>
+                                ))}
+                            </ol>
+                        );
+                    } else {
+                        // Render regular paragraph if no bold formatting is found and not numbered lines
+                        return <p key={index}>{paragraph}</p>;
+                    }
+                })}
+            </div>
+        );
+    };
     return (
-        <div className="flex  h-screen  ">
-            <div className="flex flex-col flex-grow justify-center   ">
-                <div className="flex justify-start items-center  mx-5 md:mx-8 lg:mx-8 xl:mx-24 xl:px-20">
+        <div className="flex  h-screen overflow-hidden">
+            <div className="flex flex-col flex-grow justify-center">
+                <div className="flex justify-start items-center mx-5 md:mx-8 lg:mx-8 xl:mx-24 xl:px-20">
                     <div className="space-y-4 mt-4 font-bold">
                         <div
+                            ref={chatContainerRef}
                             className="overflow-y-auto h-[600px] mt-8"
                             style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
                         >
-                            <div
-                                className={cn(
-                                    "p-8 w-full flex flex-col items-center rounded-lg"
-                                )}
-                            >
+                            <div className={cn("p-8 w-full flex flex-col items-center rounded-lg")}>
                                 {messages.map((message, index) => (
                                     <div className="flex flex-col w-full" key={index}>
-                                        <div className=" flex flex-col mb-8 ">
+                                        <div className="flex flex-col mb-8">
                                             <div className="flex flex-col">
                                                 <div className="flex">
                                                     {message.role === "user" ? (
@@ -39,7 +88,7 @@ const Home: React.FC = () => {
                                                             viewBox="0 0 24 24"
                                                             strokeWidth={1.5}
                                                             stroke="currentColor"
-                                                            className="w-7 h-7 "
+                                                            className="w-7 h-7"
                                                         >
                                                             <path
                                                                 strokeLinecap="round"
@@ -48,13 +97,8 @@ const Home: React.FC = () => {
                                                             />
                                                         </svg>
                                                     ) : (
-                                                        <div className="flex ">
-                                                            <Image
-                                                                src={rit}
-                                                                alt="RIT"
-                                                                width={30}
-                                                                height={20}
-                                                            />
+                                                        <div className="flex">
+                                                            <Image src={rit} alt="RIT" width={30} height={20} />
                                                             <p className="text-md ml-2">RITGPT</p>
                                                         </div>
                                                     )}
@@ -63,7 +107,7 @@ const Home: React.FC = () => {
                                                     </p>
                                                 </div>
                                                 <div className="flex flex-col">
-                                                    <p className="text-sm ml-10">{message.content}</p>
+                                                    <p className="text-sm ml-10">{formatResponse(message.content)}</p>
                                                 </div>
                                             </div>
                                         </div>
@@ -75,16 +119,16 @@ const Home: React.FC = () => {
                 </div>
 
                 <div className="flex-grow"></div>
-                <div className="flex justify-center ">
-                    <div className="flex w-full max-w-4xl  px-7">
+                <div className="flex justify-center">
+                    <div className="flex w-full max-w-4xl px-7">
                         <form
-                            className="flex w-full max-w-4xl mb-24 px-7"
+                            className="flex w-full max-w-4xl mb-32 px-7"
                             onSubmit={handleSubmit}
                         >
                             <input
                                 type="text"
                                 id="first_name"
-                                className="bg-white border border-gray-300  px-10 h-12 text-gray-900 text-sm rounded-3xl focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 "
+                                className="bg-white border border-gray-300 px-10 h-12 text-gray-900 text-sm rounded-3xl focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                 placeholder="Ask a Question"
                                 value={input}
                                 onChange={handleInputChange}
@@ -92,7 +136,7 @@ const Home: React.FC = () => {
                             />
                             <Button
                                 type="submit"
-                                className="ml-2 mt-1  bg-blue-600 rounded-xl "
+                                className="ml-2 mt-1 bg-blue-600 rounded-xl"
                             >
                                 {isLoading ? (
                                     <CircleSlash2 onClick={stop} className="w-5 h-6" />

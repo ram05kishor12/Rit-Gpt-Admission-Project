@@ -1,6 +1,6 @@
 "use client"
 import { Input } from "@/components/ui/input";
-
+import Image from "next/image";
 import { File } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
@@ -17,6 +17,7 @@ import { Label } from "@/components/ui/label";
 import { collection, addDoc } from "firebase/firestore";
 import { useToast } from "@/components/ui/use-toast"
 import { db } from "../firebase/firebase";
+import logo from "../../components/rit.png";
 
 export default function Admin() {
   const auth = getAuth(app);
@@ -39,10 +40,18 @@ export default function Admin() {
   }, [auth]);
 
   if (loading) {
-    return <div>Loading...</div>;
+    return (
+      <div className="flex justify-center items-center h-screen space-x-4">
+        <div className="animate-spin rounded-full h-10 w-10 border-t-2 border-b-2 border-blue-400"></div>
+        <div className="text-primary">Loading...</div>
+      </div>
+    );
   }
   if (!auth.currentUser) {
-    return <div>404 error</div>
+    return <div className="flex flex-row justify-center items-center h-screen gap-4">
+      <Image className="w-14 h-14" src={logo} alt="Example" />
+      <p className="text-4xl font-bold text-primary">404 Not Found </p>
+    </div>
   }
 
   async function signout() {
