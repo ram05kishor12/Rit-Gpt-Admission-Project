@@ -18,7 +18,7 @@ export default function RootLayout({
                     <Sidebar />
                 </div>
                 <div className="flex-1 overflow-y-auto md:pl-72">
-                    <Navbar cont={false} />
+                    <Navbar cont={false} admin={false} />
                     {children}
 
                 </div>

@@ -109,12 +109,51 @@ export default function Admin() {
   return (
     <>
       <div className="h-5">
-        <Navbar cont={true} />
+        <Navbar cont={true} admin={true} />
+
 
       </div>
-      <div className="flex flex-col">
-        {/* <div className=" flex  overflow-hidden   bg-zinc-100 border-r-2 h-screen p-3  lg:w-56 mt-10 md:w-1/3 "> */}
-        {/* <div className="  flex flex-col px-3 h-screen">
+      <DropdownMenu>
+        <DropdownMenuTrigger asChild>
+          <div className="flex justify-end mr-10 -mt-1">
+            <MenuIcon className=" w-5 h-5  block md:hidden lg:hidden xl:hidden" />
+          </div>
+        </DropdownMenuTrigger>
+        <DropdownMenuContent className="w-56" align="end" forceMount>
+          <DropdownMenuGroup>
+            <DropdownMenuItem onClick={() => setaction("addadmin")}>
+              <span className="w-full flex justify-between items-center cursor-pointer">
+                Add Admin
+                <span >
+                  <UserPlus className="w-4 h-4" />
+                </span>
+              </span>
+            </DropdownMenuItem>
+            <DropdownMenuItem onClick={() => setaction("addfile")}>
+              <span className="w-full flex justify-between items-center cursor-pointer">
+                Upload
+                <span >
+                  <Upload className="w-4 h-4" />
+                </span>
+              </span>
+            </DropdownMenuItem>
+          </DropdownMenuGroup>
+          <DropdownMenuSeparator />
+          <DropdownMenuGroup>
+            <DropdownMenuItem onClick={() => signout()}>
+              <span className="w-full flex justify-between items-center cursor-pointer">
+                Logout
+                <span>
+                  <LogOutIcon className="w-4 h-4" />
+                </span>
+              </span>
+            </DropdownMenuItem>
+          </DropdownMenuGroup>
+        </DropdownMenuContent>
+      </DropdownMenu>
+      <div className="flex flex-row">
+        <div className=" hidden  overflow-hidden   bg-zinc-100 border-r-2 h-screen mt-10 p-3   md:flex md:w-1/3 lg:flex lg:w-56   ">
+          <div className="  flex flex-col px-3 h-screen">
             <h1 className="text-2xl font-semibold mt-8 ml-4">Dashboard</h1>
             <div className="h-3/4 flex flex-col justify-between">
               <div>
@@ -133,44 +172,9 @@ export default function Admin() {
                 </Button>
               </div>
             </div>
-          </div> */}
-        <DropdownMenu>
-          <DropdownMenuTrigger asChild>
-            <MenuIcon className="w-5 h-5" />
-          </DropdownMenuTrigger>
-          <DropdownMenuContent className="w-56" align="end" forceMount>
-            <DropdownMenuGroup>
-              <DropdownMenuItem>
-                <span className="w-full flex justify-between items-center cursor-pointer">
-                  Add Admin
-                  <span onClick={() => setaction("addadmin")}>
-                    <UserPlus className="w-4 h-4" />
-                  </span>
-                </span>
-              </DropdownMenuItem>
-            <DropdownMenuItem>
-              <span className="w-full flex justify-between items-center cursor-pointer">
-                Upload
-                <span onClick={() => setaction("addfile")}>
-                  <Upload className="w-4 h-4" />
-                </span>
-              </span>
-            </DropdownMenuItem>
-            </DropdownMenuGroup>
-            <DropdownMenuSeparator />
-            <DropdownMenuGroup>
-              <DropdownMenuItem>
-                <span className="w-full flex justify-between items-center cursor-pointer">
-                  Logout
-                  <span onClick={() => signout()}>
-                    <LogOutIcon className="w-4 h-4" />
-                  </span>
-                </span>
-              </DropdownMenuItem>
-            </DropdownMenuGroup>
-          </DropdownMenuContent>
-        </DropdownMenu>
-        {/* </div> */}
+          </div>
+
+        </div>
 
         <div className="flex-1">
           <div className="flex justify-center items-center p-24">

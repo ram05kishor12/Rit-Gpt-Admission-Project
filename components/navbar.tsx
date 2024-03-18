@@ -6,7 +6,7 @@ import MobileSidebar from "./mobile-sidebar";
 import { useRouter } from "next/navigation";
 
 
-function Navbar({ cont }: { cont: boolean }) {
+function Navbar({ cont, admin }: { cont: boolean, admin: boolean }) {
     const [isLargeScreen, setIsLargeScreen] = useState(false);
     const router = useRouter();
 
@@ -40,9 +40,10 @@ function Navbar({ cont }: { cont: boolean }) {
                         </Button>
 
                     ) : (
-                        <Button variant="ghost" size="icon" onClick={() => router.push("/")}>
+                        admin ? <></> : <Button variant="ghost" size="icon" onClick={() => router.push("/")}>
                             <UserRoundCheck />
                         </Button>
+
 
 
                     )}

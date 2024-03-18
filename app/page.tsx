@@ -49,7 +49,7 @@ export default function Home() {
   }
   return (
     <>
-      <Navbar cont={true} />
+      <Navbar cont={true} admin={false} />
       <div className=" min-h-screen bg-gradient-to-r from-gray-100 via-blue-100 to-blue-300">
 
         <div className="flex w-full justify-center items-center h-screen">
