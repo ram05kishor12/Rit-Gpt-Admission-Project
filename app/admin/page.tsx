@@ -100,7 +100,7 @@ export default function Admin() {
   return (
     <>
       <div className="h-5">
-        <Navbar />
+        <Navbar cont={false} />
       </div>
       <div className="flex flex-col  md:flex-row ">
 

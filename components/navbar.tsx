@@ -3,12 +3,13 @@ import { useState, useEffect } from "react";
 import { Button } from "./ui/button";
 import { Menu, UserRoundCheck } from "lucide-react";
 import MobileSidebar from "./mobile-sidebar";
-import { Inter } from "next/font/google";
-import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 
-const Navbar = () => {
+
+function Navbar({ cont }: { cont: boolean }) {
     const [isLargeScreen, setIsLargeScreen] = useState(false);
+    const router = useRouter();
 
     // Function to detect screen size and set state accordingly
     const handleResize = () => {
@@ -29,18 +30,22 @@ const Navbar = () => {
     return (
         <>
             <div className="flex items-center  bg-white p-2 shadow-lg">
-                <MobileSidebar />
-                <div className="flex justify-center md:justify-start xl:justify-start lg:justify-start w-full md:w-auto">
+                {!cont && (<MobileSidebar />)}
+                <div className="flex justify-center px-8 md:justify-start xl:justify-start lg:justify-start w-full md:w-auto">
                     <h1 className=" flex text-2xl px-5 text-slate-900 font-semibold">RIT <span className="text-blue-600 px-2">GPT</span></h1>
                 </div>
-                <div className={isLargeScreen ? "flex justify-end w-full" : "hidden md:block"}>
-                    {isLargeScreen ? (
-                        <Button variant="ghost" size="icon">
+                <div className={isLargeScreen ? "flex justify-end w-full px-8" : "flex justify-start"}>
+                    {!cont && isLargeScreen ? (
+                        <Button variant="ghost" size="icon" onClick={() => router.push("/")}>
                             <UserRoundCheck />
                         </Button>
 
                     ) : (
-                        <Menu />
+                        <Button variant="ghost" size="icon" onClick={() => router.push("/")}>
+                            <UserRoundCheck />
+                        </Button>
+
+
                     )}
                 </div>
             </div>
