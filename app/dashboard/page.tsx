@@ -72,7 +72,7 @@ const Home: React.FC = () => {
                     <div className="space-y-4 mt-4 font-bold">
                         <div
                             ref={chatContainerRef}
-                            className="overflow-y-auto h-[600px] mt-8"
+                            className="overflow-y-auto h-auto mt-8"
                             style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
                         >
                             <div className={cn("p-8 w-full flex flex-col items-center rounded-lg")}>
@@ -122,13 +122,13 @@ const Home: React.FC = () => {
                 <div className="flex justify-center">
                     <div className="flex w-full max-w-4xl px-7">
                         <form
-                            className="flex w-full max-w-4xl mb-32 px-7"
+                            className="flex w-full max-w-4xl mb-32 "
                             onSubmit={handleSubmit}
                         >
                             <input
                                 type="text"
                                 id="first_name"
-                                className="bg-white border border-gray-300 px-10 h-12 text-gray-900 text-sm rounded-3xl focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                className="bg-white border border-gray-300 px-10 h-12    mb-12  md:mb-0 lg:mb-0 xl:mb-0 text-gray-900 text-sm rounded-3xl focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                                 placeholder="Ask a Question"
                                 value={input}
                                 onChange={handleInputChange}

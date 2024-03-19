@@ -28,9 +28,6 @@ export default function Home() {
 
 
   async function login() {
-    // const querySnapshot = await getDocs(collection(db, "allowlist"));
-    // for (const doc of querySnapshot.docs) {
-    // if (doc.data().person === email) {
     try {
       await setPersistence(auth, browserLocalPersistence);
       await signInWithEmailAndPassword(auth, email, password);
@@ -43,8 +40,7 @@ export default function Home() {
       console.error("Error signing in:", errorCode, errorMessage);
       toast({ description: errorMessage, variant: "destructive" })
     }
-    // }
-    // }
+
     // toast({ description: "you are not an administrator", variant: "destructive" })
   }
   return (
