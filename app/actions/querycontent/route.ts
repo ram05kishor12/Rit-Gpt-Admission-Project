@@ -20,7 +20,7 @@ export async function match(question: string) {
             data: string;
         };
         const qualify = queryResponse.matches.filter(
-            (match) => match.score && match.score > 0.7
+            (match) => match.score && match.score > 0.75
         );
 
         const content = qualify.map((match) => match.metadata as Metadata);

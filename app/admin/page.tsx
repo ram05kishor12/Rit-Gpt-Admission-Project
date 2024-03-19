@@ -108,8 +108,8 @@ export default function Admin() {
       </div>
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
-          <div className="flex justify-end mr-5">
-            <MenuIcon className="w-5 h-5 block" />
+          <div className="flex justify-end  -mt-1 mr-5">
+            <MenuIcon className="w-5 h-5 block md:hidden lg:hidden xl:hidden" />
           </div>
         </DropdownMenuTrigger>
         <DropdownMenuContent className="w-56" align="end" forceMount>
@@ -146,7 +146,7 @@ export default function Admin() {
       </DropdownMenu>
       <div className="overflow-x-hidden">
         <div className="flex">
-          {/* <div className="hidden overflow-hidden bg-zinc-100 border-r-2 h-screen mt-10 p-3 md:flex md:w-1/3 lg:flex lg:w-56">
+          <div className="hidden overflow-hidden bg-zinc-100 border-r-2 h-screen mt-8 p-3 md:flex justify-center  lg:flex lg:w-56">
             <div className="flex flex-col px-3 h-screen">
               <h1 className="text-2xl font-semibold mt-8 ml-4">Dashboard</h1>
               <div className="h-3/4 flex flex-col justify-between">
@@ -167,47 +167,47 @@ export default function Admin() {
                 </div>
               </div>
             </div>
-          </div> */}
+          </div>
 
-          <div className="flex-1">
+          <div className="flex-1 mt-4">
             <div className="flex justify-center items-center p-12">
               <p className="text-2xl font-extrabold px-2 md:px-14 mt-8 md:mt-0">{action === "addfile" ? "Upload your file" : "Add Administrators"}</p>
             </div>
 
-            <div className="flex items-center justify-center h-auto p-8">
-              <Card className="bg-blue-50 p-3 flex-shrink w-full -ml-2 md:w-auto">
+            <div className="flex items-center justify-center  h-auto p-1 ">
+              <Card className="bg-blue-50 ml-4 mr-4 py-2  md:w-auto">
                 <div className="flex justify-center mb-6">
                   <div className="flex items-center justify-center bg-primary/10 w-20 h-20 rounded-full">
                     {action === "addfile" ? (<File className="w-10 h-10 text-primary" />) : (<UserPlus className="w-10 h-10 text-primary" />)}
                   </div>
                 </div>
 
-                <h2 className="text-xl font-semibold text-center mb-2">
+                <h2 className="text-xl font-semibold text-center mb-2 ml-4 mr-4">
                   {action === "addfile" ? "Upload college" : "Add Administrators details"}
                 </h2>
                 {action === "addfile" ? (
                   <>
-                    <div className="flex justify-center text-sm leading-6 text-center text-muted-foreground mb-8 max-w-md">
+                    <div className="flex justify-center text-sm leading-6 px-16 text-center text-muted-foreground mb-8 ">
                       Choose the text file of the college data to upload
                     </div>
-                    <form action={getstring} className="flex flex-col items-center">
-                      <Input id="picture" type="file" name="file" className="mb-4" />
+                    <form action={getstring} className="flex flex-col items-center justify-center">
+                      <Input id="picture" type="file" name="file" className="mb-4 w-64" />
                       <Loadingbtn content={"upload file"} />
                     </form>
                   </>
                 ) : (
                   <>
                     <form onSubmit={(e) => e.preventDefault()}>
-                      <div className="flex flex-col justify-start w-full mt-8 mb-6 gap-1.5">
+                      <div className="flex flex-col justify-start mt-8 mb-6 gap-1.5 px-4">
                         <Label htmlFor="email">Email</Label>
                         <Input type="email" id="email" placeholder="Email" onChange={(e) => { setEmail(e.target.value) }} />
                       </div>
-                      <div className="flex flex-col gap-1.5">
+                      <div className="flex flex-col gap-1.5 px-4">
                         <Label htmlFor="email">Password</Label>
                         <Input type="password" id="e" placeholder="Email" onChange={(e) => { setPassword(e.target.value) }} />
                       </div>
-                      <div className="flex justify-center mt-8">
-                        <Button className="text-md w-80" type="submit" onClick={addadmin}>
+                      <div className="flex justify-center mt-8 px-4">
+                        <Button className="text-md w-60 mb-4" type="submit" onClick={addadmin}>
                           {btnloading && (
                             <div role="status">
                               <svg aria-hidden="true" className="inline w-5 h-5 text-gray-200 animate-spin mr-2 dark:text-gray-600 fill-gray-600 dark:fill-gray-300" viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg">
