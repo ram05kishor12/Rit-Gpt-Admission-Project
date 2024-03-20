@@ -67,7 +67,7 @@ const Home: React.FC = () => {
     };
     return (
         <div className="flex  h-screen overflow-hidden">
-            <div className="flex flex-col flex-grow justify-center">
+            <div className="flex flex-col flex-grow ">
                 <div className="flex justify-start items-center mx-5 md:mx-8 lg:mx-8 xl:mx-24 xl:px-20">
                     <div className="space-y-4 mt-4 font-bold">
                         <div
@@ -118,33 +118,36 @@ const Home: React.FC = () => {
                     </div>
                 </div>
 
-                <div className="flex-grow overflow-y-hidden"></div>
-                <div className="flex justify-center">
-                    <div className="flex w-full max-w-4xl px-7">
-                        <form
-                            className="flex w-full max-w-4xl mb-32 px-7"
-                            onSubmit={handleSubmit}
-                        >
-                            <input
-                                type="text"
-                                id="first_name"
-                                className="bg-white border border-gray-300 px-10 h-12    mb-24 md:mb-0 lg:mb-0 xl:mb-0 text-gray-900 text-sm rounded-3xl focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                placeholder="Ask a Question"
-                                value={input}
-                                onChange={handleInputChange}
-                                required
-                            />
-                            <Button
-                                type="submit"
-                                className="ml-2 mt-1 bg-blue-600 rounded-xl"
+                <div className="">
+
+
+                    <div className="flex justify-center     ">
+                        <div className="flex w-full max-w-4xl px-7   ">
+                            <form
+                                className="flex w-full max-w-4xl   "
+                                onSubmit={handleSubmit}
                             >
-                                {isLoading ? (
-                                    <CircleSlash2 onClick={stop} className="w-5 h-6" />
-                                ) : (
-                                    <SendHorizontal className="w-5 h-6" />
-                                )}
-                            </Button>
-                        </form>
+                                <input
+                                    type="text"
+                                    id="first_name"
+                                    className="bg-white border  border-gray-300 px-10 h-12    md:mb-0 lg:mb-0 xl:mb-0 text-gray-900 text-sm rounded-3xl focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                    placeholder="Ask a Question"
+                                    value={input}
+                                    onChange={handleInputChange}
+                                    required
+                                />
+                                <Button
+                                    type="submit"
+                                    className="ml-2 mt-1 bg-blue-600 rounded-xl"
+                                >
+                                    {isLoading ? (
+                                        <CircleSlash2 onClick={stop} className="w-5 h-6" />
+                                    ) : (
+                                        <SendHorizontal className="w-5 h-6" />
+                                    )}
+                                </Button>
+                            </form>
+                        </div>
                     </div>
                 </div>
             </div>
