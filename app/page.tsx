@@ -40,8 +40,6 @@ export default function Home() {
       console.error("Error signing in:", errorCode, errorMessage);
       toast({ description: errorMessage, variant: "destructive" })
     }
-
-    // toast({ description: "you are not an administrator", variant: "destructive" })
   }
   return (
     <>

@@ -100,13 +100,21 @@ export default function Admin() {
       toast({ description: error.message, variant: "destructive" });
     }
   }
+  async function uploadfile(formdata: FormData) {
+    const data = await getstring(formdata);
+    if (data?.message) {
+      toast({ description: "successfully uploaded", variant: "success" });
+    }
+    else {
+      toast({ description: "error in uploading", variant: "destructive" });
+    }
+  }
 
   return (
     <>
       <div className="h-5 w-auto">
         <Navbar cont={true} admin={true} />
       </div>
-      {/* <div className="bg-black h-[5px] w-full"></div> */}
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
           <div className="flex justify-end  -mt-1 mr-5">
@@ -190,7 +198,7 @@ export default function Admin() {
                   <div className="flex justify-center text-sm leading-6 px-16 text-center text-muted-foreground mb-8 ">
                     Choose the text file of the college data to upload
                   </div>
-                  <form action={getstring} className="flex flex-col items-center justify-center">
+                  <form action={uploadfile} className="flex flex-col items-center justify-center">
                     <Input id="picture" type="file" name="file" className="mb-4 w-64" />
                     <Loadingbtn content={"upload file"} />
                   </form>
@@ -226,7 +234,6 @@ export default function Admin() {
           </div>
         </div>
       </div>
-      {/* </div> */}
     </>
   );
 }

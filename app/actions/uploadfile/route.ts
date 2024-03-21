@@ -4,6 +4,9 @@ import { GetObjectCommand, PutObjectCommand } from "@aws-sdk/client-s3";
 import { getEmbeddings } from "../embeddings/route";
 import { Pinecone } from "@pinecone-database/pinecone";
 import { S3Client } from "@aws-sdk/client-s3";
+import { doc, setDoc, getDoc } from "firebase/firestore";
+import { db } from "@/app/firebase/firebase";
+import { getid } from "../getid/route";
 
 const pc = new Pinecone({ apiKey: process.env.PINECONE_API_KEY as string });
 const index = pc.index("chat-pdf");
@@ -78,17 +81,23 @@ export async function getstring(formdata: FormData) {
             const embedding = await getEmbeddings(chunk);
             console.log(embedding);
             try {
+                const id=await getid();
                 await namespace.upsert([
-                    { id: "9", values: embedding, metadata: { data: chunk } },
+                    { id: id, values: embedding, metadata: { data: chunk } },
                 ]);
+                await setDoc(doc(db, "allowlist", "e0HAWON71Tr6gqfp3EHy"), {
+                    id: id + 1,
+                  }, { merge: true });
                 console.log("done");
             } catch (error) {
                 console.log("error occured" + error);
             }
             console.log("chunk:" + chunk);
         }
-        return str;
     } catch (err) {
         console.error(err);
     }
+    return {
+        message: "success",
+    };
 }
