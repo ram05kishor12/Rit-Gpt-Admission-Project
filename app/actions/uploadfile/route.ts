@@ -51,6 +51,7 @@ export async function getstring(formdata: FormData) {
     const file = formdata.get("file") as File;
     const blob = new Blob([file], { type: "text/plain" });
     const buffer = Buffer.from(await blob.arrayBuffer());
+    let ids=await getid();
 
     const commands = new PutObjectCommand({
         Bucket: "chat-pdf-rk",
@@ -81,21 +82,24 @@ export async function getstring(formdata: FormData) {
             const embedding = await getEmbeddings(chunk);
             console.log(embedding);
             try {
-                const id=await getid();
                 await namespace.upsert([
-                    { id: id, values: embedding, metadata: { data: chunk } },
+                    { id: ids.toString(), values: embedding, metadata: { data: chunk } },
                 ]);
-                await setDoc(doc(db, "allowlist", "e0HAWON71Tr6gqfp3EHy"), {
-                    id: id + 1,
-                  }, { merge: true });
+                ids++;
+                console.log(ids);
                 console.log("done");
             } catch (error) {
-                console.log("error occured" + error);
+                console.log("error occurred" + error);
             }
             console.log("chunk:" + chunk);
         }
     } catch (err) {
         console.error(err);
+    }
+    finally{
+        await setDoc(doc(db, "allowlist", "e0HAWON71Tr6gqfp3EHy"), {
+            id:ids,
+          }, { merge: true });
     }
     return {
         message: "success",

@@ -27,7 +27,7 @@ export async function POST(req: Request) {
         }
         else{  
             const response = await openai.chat.completions.create({
-                messages: [{ role: "system", content: content }, ...messages],
+                messages: [{ role: "system", content: "IMPORTANT:only respond from this content only as this data belongs to Rajalakshmi Institue of Technology and answer relatively to this data only.Answer all question realted to Rajalakshmi Institute of Technology.Also give some suggestion questions based on user content...Content:"+content }, ...messages],
                 model: "gpt-3.5-turbo",
                 stream: true,
                 temperature:0.9,

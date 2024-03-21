@@ -12,7 +12,7 @@ export async function match(question: string) {
         const vectors = await getEmbeddings(question);
         const queryResponse = await namespace.query({
             vector: vectors,
-            topK: 6,
+            topK: 8,
             includeMetadata: true,
         });
         console.log(queryResponse);
