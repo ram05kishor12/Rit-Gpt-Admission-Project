@@ -152,14 +152,14 @@ const Home: React.FC = () => {
         <div className="h-[100vh] flex flex-col">
             {/* Message Container */}
             <div className="flex-1 flex justify-center items-start  bg-white overflow-y-auto">
-                <div className="flex justify-start  flex-grow items-start overflow-y-auto mx-5 md:mx-8 lg:mx-8 xl:mx-24 xl:px-20">
+                <div className="flex justify-start  flex-grow items-start overflow-y-auto mx-3 md:mx-8 lg:mx-8 xl:mx-24 xl:px-20">
                     <div className="space-y-4 mt-4 font-bold overflow-y-auto">
                         <div
                             ref={chatContainerRef}
                             className="overflow-y-scroll h-[calc(100%-4rem)] mt-2 mb-[8rem]"
                             style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
                         >
-                            <div className={cn("p-8 w-full flex flex-col items-center rounded-lg")}>
+                            <div className={cn("p-6 w-full flex flex-col items-center rounded-lg")}>
                                 {messages.map((message, index) => (
                                     <div className="flex flex-col w-full" key={index}>
                                         <div className="flex flex-col mb-8">
@@ -204,7 +204,7 @@ const Home: React.FC = () => {
             </div>
 
             {/* Input Bar */}
-            <div className=" sticky bottom-3 px-6 flex items-center justify-center bg-white ">
+            <div className=" sticky bottom-0 px-6 flex flex-col items-center justify-center bg-white ">
                 <form
                     className="flex items-center w-full max-w-4xl   "
                     onSubmit={handleSubmit}
@@ -229,6 +229,7 @@ const Home: React.FC = () => {
                         )}
                     </Button>
                 </form>
+                <div className="text-xs md:text-sm lg:text-sm xl:text-sm bg-white my-3 h-2  text-center text-gray-400">RITGPT can make mistakes.Please use carefully</div>
             </div>
         </div>
     );
