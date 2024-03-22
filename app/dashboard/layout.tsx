@@ -17,11 +17,12 @@ export default function RootLayout({
                 <div className=" hidden h-full md:flex md:w-72 md:flex-col md:fixed md:inset-y-0 z-[80] ">
                     <Sidebar />
                 </div>
-                <div className="flex-1 overflow-y-auto md:pl-72">
+                <div className="  md:pl-72">
                     <Navbar cont={false} admin={false} />
                     {children}
-
                 </div>
+
+
             </body>
         </html>
     );
