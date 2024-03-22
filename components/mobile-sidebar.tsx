@@ -18,7 +18,7 @@ const MobileSidebar = () => {
             <SheetTrigger className="">
                 <Button variant="ghost" size="icon"
                     className="md:hidden">
-                    <Menu className=""/>
+                    <Menu />
                 </Button>
             </SheetTrigger>
             <SheetContent side="left" className="p-0 w-[300px]">

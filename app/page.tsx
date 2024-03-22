@@ -24,15 +24,18 @@ export default function Home() {
   const [password, setPassword] = useState("");
   const router = useRouter();
   const auth = getAuth(app);
+  const [loading, setLoading] = useState(false);
   const { toast } = useToast();
 
 
   async function login() {
+    setLoading(true);
     try {
       await setPersistence(auth, browserLocalPersistence);
       await signInWithEmailAndPassword(auth, email, password);
       console.log("User is signed in");
       router.push("/admin");
+      setLoading(false);
 
     } catch (error: any) {
       const errorCode = error.code;
@@ -68,7 +71,10 @@ export default function Home() {
               <CardContent>
                 <div className="flex justify-center">
                   <Button className="text-md w-full" type="submit">
-                    Login
+                    {loading ? (<div className="flex">
+                      <div className="h-5 w-5 animate-spin rounded-full border-b-2"></div>
+                      <div className="text-white">Logging in...</div>
+                    </div>) : "Login"}
                   </Button>
                 </div>
               </CardContent>
