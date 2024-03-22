@@ -66,92 +66,90 @@ const Home: React.FC = () => {
         );
     };
     return (
-        <div className="flex  h-screen overflow-hidden">
-            <div className="flex flex-col flex-grow ">
-                <div className="flex justify-start items-center mx-5 md:mx-8 lg:mx-8 xl:mx-24 xl:px-20">
-                    <div className="space-y-4 mt-4 font-bold">
-                        <div
-                            ref={chatContainerRef}
-                            className="overflow-y-auto h-[600px] mt-8"
-                            style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
-                        >
-                            <div className={cn("p-8 w-full flex flex-col items-center rounded-lg")}>
-                                {messages.map((message, index) => (
-                                    <div className="flex flex-col w-full" key={index}>
-                                        <div className="flex flex-col mb-8">
+
+        <div className="flex flex-col justify-between h-screen  ">
+            <div className="flex justify-start h-3/4 flex-grow items-center mx-5 md:mx-8 lg:mx-8 xl:mx-24 xl:px-20">
+                <div className="space-y-4 mt-4 font-bold">
+                    <div
+                        ref={chatContainerRef}
+                        className="overflow-y-auto h-[600px] mt-8"
+                        style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
+                    >
+                        <div className={cn("p-8 w-full flex flex-col items-center rounded-lg")}>
+                            {messages.map((message, index) => (
+                                <div className="flex flex-col w-full" key={index}>
+                                    <div className="flex flex-col mb-8">
+                                        <div className="flex flex-col">
+                                            <div className="flex">
+                                                {message.role === "user" ? (
+                                                    <svg
+                                                        xmlns="http://www.w3.org/2000/svg"
+                                                        fill="none"
+                                                        viewBox="0 0 24 24"
+                                                        strokeWidth={1.5}
+                                                        stroke="currentColor"
+                                                        className="w-7 h-7"
+                                                    >
+                                                        <path
+                                                            strokeLinecap="round"
+                                                            strokeLinejoin="round"
+                                                            d="M17.982 18.725A7.488 7.488 0 0 0 12 15.75a7.488 7.488 0 0 0-5.982 2.975m11.963 0a9 9 0 1 0-11.963 0m11.963 0A8.966 8.966 0 0 1 12 21a8.966 8.966 0 0 1-5.982-2.275M15 9.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"
+                                                        />
+                                                    </svg>
+                                                ) : (
+                                                    <div className="flex">
+                                                        <Image src={rit} alt="RIT" width={30} height={20} />
+                                                        <p className="text-md ml-2">RITGPT</p>
+                                                    </div>
+                                                )}
+                                                <p className="text-md ml-2 mb-1">
+                                                    {message.role === "user" && "You"}
+                                                </p>
+                                            </div>
                                             <div className="flex flex-col">
-                                                <div className="flex">
-                                                    {message.role === "user" ? (
-                                                        <svg
-                                                            xmlns="http://www.w3.org/2000/svg"
-                                                            fill="none"
-                                                            viewBox="0 0 24 24"
-                                                            strokeWidth={1.5}
-                                                            stroke="currentColor"
-                                                            className="w-7 h-7"
-                                                        >
-                                                            <path
-                                                                strokeLinecap="round"
-                                                                strokeLinejoin="round"
-                                                                d="M17.982 18.725A7.488 7.488 0 0 0 12 15.75a7.488 7.488 0 0 0-5.982 2.975m11.963 0a9 9 0 1 0-11.963 0m11.963 0A8.966 8.966 0 0 1 12 21a8.966 8.966 0 0 1-5.982-2.275M15 9.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"
-                                                            />
-                                                        </svg>
-                                                    ) : (
-                                                        <div className="flex">
-                                                            <Image src={rit} alt="RIT" width={30} height={20} />
-                                                            <p className="text-md ml-2">RITGPT</p>
-                                                        </div>
-                                                    )}
-                                                    <p className="text-md ml-2 mb-1">
-                                                        {message.role === "user" && "You"}
-                                                    </p>
-                                                </div>
-                                                <div className="flex flex-col">
-                                                    <p className="text-sm ml-10">{formatResponse(message.content)}</p>
-                                                </div>
+                                                <p className="text-sm ml-10">{formatResponse(message.content)}</p>
                                             </div>
                                         </div>
                                     </div>
-                                ))}
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div className="">
-
-
-                    <div className="flex justify-center     ">
-                        <div className="flex w-full max-w-4xl px-7   ">
-                            <form
-                                className="flex w-full max-w-4xl   "
-                                onSubmit={handleSubmit}
-                            >
-                                <input
-                                    type="text"
-                                    id="first_name"
-                                    className="bg-white border  border-gray-300 px-10 h-12    md:mb-0 lg:mb-0 xl:mb-0 text-gray-900 text-sm rounded-3xl focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                    placeholder="Ask a Question"
-                                    value={input}
-                                    onChange={handleInputChange}
-                                    required
-                                />
-                                <Button
-                                    type="submit"
-                                    className="ml-2 mt-1 bg-blue-600 rounded-xl"
-                                >
-                                    {isLoading ? (
-                                        <CircleSlash2 onClick={stop} className="w-5 h-6" />
-                                    ) : (
-                                        <SendHorizontal className="w-5 h-6" />
-                                    )}
-                                </Button>
-                            </form>
+                                </div>
+                            ))}
                         </div>
                     </div>
                 </div>
             </div>
+
+            <div className="flex justify-center items-start w-full  h-1/4 mt-8 z-50 ">
+                <div className="flex items-center  w-full ">
+                    <div className="flex w-full  px-7 justify-center  ">
+                        <form
+                            className="flex w-full max-w-4xl   "
+                            onSubmit={handleSubmit}
+                        >
+                            <input
+                                type="text"
+                                id="first_name"
+                                className="bg-white border  border-gray-300 px-10 h-12    md:mb-0 lg:mb-0 xl:mb-0 text-gray-900 text-sm rounded-3xl focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                                placeholder="Ask a Question"
+                                value={input}
+                                onChange={handleInputChange}
+                                required
+                            />
+                            <Button
+                                type="submit"
+                                className="ml-2 mt-1 bg-blue-600 rounded-xl"
+                            >
+                                {isLoading ? (
+                                    <CircleSlash2 onClick={stop} className="w-5 h-6" />
+                                ) : (
+                                    <SendHorizontal className="w-5 h-6" />
+                                )}
+                            </Button>
+                        </form>
+                    </div>
+                </div>
+            </div>
         </div>
+
     );
 };
 
