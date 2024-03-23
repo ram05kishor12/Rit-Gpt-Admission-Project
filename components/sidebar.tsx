@@ -9,6 +9,7 @@ import { Plus } from "lucide-react";
 import { Phone } from "lucide-react";
 import { Mail } from "lucide-react";
 import { Globe } from "lucide-react";
+import Reload from "./reload";
 
 const montserrat = Poppins({
   weight: "600",
@@ -28,14 +29,15 @@ function Sidebar() {
       />
       <div className="bg-gray-200 h-[0.5px] w-[300px] my-3"></div>
       <div className="text-white text-2xl font-bold py-2">
-        <Button className=" w-56  animate-fade-in hover:transform hover:scale-105 transition-transform text-white hover:bg-blue-950 shadow-lg bg-blue-600">
+        {/* <Button className=" w-56  animate-fade-in hover:transform hover:scale-105 transition-transform text-white hover:bg-blue-950 shadow-lg bg-blue-600">
           <Link href="/">
             <div className=" flex gap-1 text-lg">
               <Plus className="w-5 h-7" />
               New Chat
             </div>
           </Link>
-        </Button>
+        </Button> */}
+        <Reload />
       </div>
       <div className="p-2.5 mt-3 flex items-center rounded-md px-4 duration-300">
         <span className="text-[13px] ml-4 text-blue-700 font-bold">
@@ -93,3 +95,8 @@ function Sidebar() {
 }
 
 export default Sidebar;
+
+
+
+
+
