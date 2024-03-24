@@ -68,11 +68,10 @@ const Home: React.FC = () => {
     };
     return (
         <div className="h-[100vh] flex flex-col">
-            <div className="flex-1 flex justify-center items-start  bg-white overflow-y-auto">
+            <div className="flex-1 flex justify-center items-start  bg-white overflow-y-auto" ref={chatContainerRef}>
                 <div className="flex justify-start  flex-grow items-start overflow-y-auto mx-3 md:mx-8 lg:mx-8 xl:mx-24 xl:px-20">
                     <div className="space-y-4 mt-4 font-bold overflow-y-auto">
                         <div
-                            ref={chatContainerRef}
                             className="overflow-y-scroll h-[calc(100%-4rem)] mt-2 mb-[8rem]"
                             style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
                         >
