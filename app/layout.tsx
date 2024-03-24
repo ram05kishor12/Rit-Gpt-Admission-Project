@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Poppins } from "next/font/google";
 import "./globals.css";
 import { Toaster } from "@/components/ui/toaster"
+import { ChatProvider } from "@/components/chatprovider";
 
 const inter = Poppins({ weight: "400", subsets: ["devanagari"] });
 
@@ -18,10 +19,12 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={inter.className}>
-        <main>
-          <Toaster />
-        </main>
-        {children}
+        <ChatProvider>
+          <main>
+            <Toaster />
+          </main>
+          {children}
+        </ChatProvider>
       </body>
     </html>
   );
