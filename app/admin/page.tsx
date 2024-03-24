@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import Navbar from "@/components/navbar";
 import { useState, useEffect } from "react";
-import { Getstring } from "../actions/uploadfile/route";
+import { Getstring } from "../actions/route4";
 import {
   DropdownMenu,
   DropdownMenuContent,

@@ -1,7 +1,7 @@
 "use server";
 
 import { Pinecone } from "@pinecone-database/pinecone";
-import {GetEmbeddings}  from "../embeddings/route";
+import {GetEmbeddings}  from "../actions/route1";
 
 const pc = new Pinecone({ apiKey: process.env.PINECONE_API_KEY as string });
 const index = pc.index("chat-pdf");

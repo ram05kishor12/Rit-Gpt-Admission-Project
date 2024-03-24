@@ -1,12 +1,12 @@
 "use server";
 
 import { GetObjectCommand, PutObjectCommand } from "@aws-sdk/client-s3";
-import { GetEmbeddings } from "../embeddings/route";
+import { GetEmbeddings } from "../actions/route1";
 import { Pinecone } from "@pinecone-database/pinecone";
 import { S3Client } from "@aws-sdk/client-s3";
 import { doc, setDoc, getDoc } from "firebase/firestore";
 import { db } from "@/app/firebase/firebase";
-import { Getid } from "../getid/route";
+import { Getid } from "../actions/route2";
 
 const pc = new Pinecone({ apiKey: process.env.PINECONE_API_KEY as string });
 const index = pc.index("chat-pdf");

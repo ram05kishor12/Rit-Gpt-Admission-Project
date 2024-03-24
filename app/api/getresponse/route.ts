@@ -1,6 +1,6 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import OpenAI from "openai";
-import { Match } from "../../actions/querycontent/route";
+import { Match } from "../../actions/route3";
 import { NextResponse } from "next/server";
 import { OpenAIStream, StreamingTextResponse } from "ai";
 
