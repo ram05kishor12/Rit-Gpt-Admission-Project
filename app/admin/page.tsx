@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import Navbar from "@/components/navbar";
 import { useState, useEffect } from "react";
-import { getstring } from "../actions/uploadfile/route";
+import { Getstring } from "../actions/uploadfile/route";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -101,7 +101,7 @@ export default function Admin() {
     }
   }
   async function uploadfile(formdata: FormData) {
-    const data = await getstring(formdata);
+    const data = await Getstring(formdata);
     if (data?.message) {
       toast({ description: "successfully uploaded", variant: "success" });
     }

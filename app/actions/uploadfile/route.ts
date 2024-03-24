@@ -1,12 +1,12 @@
 "use server";
 
 import { GetObjectCommand, PutObjectCommand } from "@aws-sdk/client-s3";
-import  getEmbeddings  from "../embeddings/route";
+import { GetEmbeddings } from "../embeddings/route";
 import { Pinecone } from "@pinecone-database/pinecone";
 import { S3Client } from "@aws-sdk/client-s3";
 import { doc, setDoc, getDoc } from "firebase/firestore";
 import { db } from "@/app/firebase/firebase";
-import { getid } from "../getid/route";
+import { Getid } from "../getid/route";
 
 const pc = new Pinecone({ apiKey: process.env.PINECONE_API_KEY as string });
 const index = pc.index("chat-pdf");
@@ -47,11 +47,11 @@ function split(str: string, chunkSize: number) {
     return chunks;
 }
 
-export async function getstring(formdata: FormData) {
+export async function Getstring(formdata: FormData) {
     const file = formdata.get("file") as File;
     const blob = new Blob([file], { type: "text/plain" });
     const buffer = Buffer.from(await blob.arrayBuffer());
-    let ids=await getid();
+    let ids=await Getid();
 
     const commands = new PutObjectCommand({
         Bucket: "chat-pdf-rk",
@@ -79,7 +79,7 @@ export async function getstring(formdata: FormData) {
         console.log(str);
         const chunks = split(str, 1000);
         for (const chunk of chunks) {
-            const embedding = await getEmbeddings(chunk);
+            const embedding = await GetEmbeddings(chunk);
             console.log(embedding);
             try {
                 await namespace.upsert([

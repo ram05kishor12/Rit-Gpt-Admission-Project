@@ -1,15 +1,15 @@
 "use server";
 
 import { Pinecone } from "@pinecone-database/pinecone";
-import  getEmbeddings  from "../embeddings/route";
+import {GetEmbeddings}  from "../embeddings/route";
 
 const pc = new Pinecone({ apiKey: process.env.PINECONE_API_KEY as string });
 const index = pc.index("chat-pdf");
 const namespace = index.namespace("ns1");
 
-export async function match(question: string) {
+export async function Match(question: string) {
     try {
-        const vectors = await getEmbeddings(question);
+        const vectors = await GetEmbeddings(question);
         const queryResponse = await namespace.query({
             vector: vectors,
             topK: 8,
