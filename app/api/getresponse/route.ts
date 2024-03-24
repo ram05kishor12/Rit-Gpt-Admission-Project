@@ -1,6 +1,6 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import OpenAI from "openai";
-import { match } from "../../actions/querycontent/route";
+import { Match } from "../../actions/querycontent/route";
 import { NextResponse } from "next/server";
 import { OpenAIStream, StreamingTextResponse } from "ai";
 
@@ -13,7 +13,7 @@ export async function POST(req: Request) {
     const question = messages[messages.length - 1].content;
     console.log("question" + question);
     try {
-        let content = await match(question);
+        let content = await Match(question);
         console.log("content" + content);
         if (content.includes("invalid")) {
             let string = "I am sorry, I cannot respond to this question as i have been trained to respond only to Rajalakshmi Insititue of Technology admission enquiries. Please ask a valid question.";
