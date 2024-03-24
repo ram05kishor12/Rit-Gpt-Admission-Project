@@ -1,7 +1,7 @@
 "use server";
 
 import { GetObjectCommand, PutObjectCommand } from "@aws-sdk/client-s3";
-import { getEmbeddings } from "../embeddings/route";
+import  getEmbeddings  from "../embeddings/route";
 import { Pinecone } from "@pinecone-database/pinecone";
 import { S3Client } from "@aws-sdk/client-s3";
 import { doc, setDoc, getDoc } from "firebase/firestore";
