@@ -17,14 +17,14 @@ export async function POST(req: Request) {
         let content = await Match(question);
         console.log("content" + content);
         if (content.includes("invalid")) {
-             message="I am sorry, I cannot respond to this question as i have been trained to respond only to Rajalakshmi Insititue of Technology admission enquiries. Please ask a valid question."
+             message=" respond that I am sorry, I cannot respond to this question as i have been trained to respond only to Rajalakshmi Insititue of Technology admission enquiries. Please ask a valid question."
         }
         else{
              message=content;
         }
           
             const response = await openai.chat.completions.create({
-                messages: [{ role: "system", content: "IMPORTANT:only respond from this content only as this data belongs to Rajalakshmi Institue of Technology and answer relatively to this data only.Answer all question realted to Rajalakshmi Institute of Technology.Also give some suggestion questions based on user content...Content:"+message }, ...messages],
+                messages: [{ role: "system", content: "you are chatbot desgined to answer to questions regarding Rajalakshmi Institute of Technology" }, { role: "user", content: "i will provide you a content.you should respond only from it if the content doesnt contains any information about the question,pls dont answer even as a general answer..content:"+message+"question is:"+question }],
                 model: "gpt-3.5-turbo",
                 stream: true,
                 temperature:0.9,
