@@ -40,6 +40,7 @@ export default function Home() {
     } catch (error: any) {
       const errorCode = error.code;
       const errorMessage = error.message;
+      setLoading(false);
       console.error("Error signing in:", errorCode, errorMessage);
       toast({ description: errorMessage, variant: "destructive" })
     }
