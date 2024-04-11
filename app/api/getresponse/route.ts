@@ -24,7 +24,7 @@ export async function POST(req: Request) {
         }
           
             const response = await openai.chat.completions.create({
-                messages: [{ role: "system", content: "you are chatbot desgined to answer to questions regarding Rajalakshmi Institute of Technology" }, { role: "user", content: "i will provide you a content.you should respond only from it. if the content doesnt contains any information about the question,pls dont answer even as a general answer..content:"+message+"question is:"+question }],
+                messages: [{ role: "system", content: "you are an chatbot desgined to answer to questions regarding Rajalakshmi Institute of Technology" }, { role: "user", content: "i will provide you a content.you should respond only from it. if the content doesnt contains any information about the question,pls dont answer even as a general answer..content:"+message+"question is:"+question }],
                 model: "gpt-3.5-turbo",
                 stream: true,
                 temperature:0.9,

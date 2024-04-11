@@ -3,6 +3,7 @@
 import { Pinecone } from "@pinecone-database/pinecone";
 import {GetEmbeddings}  from "../actions/route1";
 
+
 const pc = new Pinecone({ apiKey: process.env.PINECONE_API_KEY as string });
 const index = pc.index("chat-pdf");
 const namespace = index.namespace("ns1");
@@ -12,7 +13,7 @@ export async function Match(question: string) {
         const vectors = await GetEmbeddings(question);
         const queryResponse = await namespace.query({
             vector: vectors,
-            topK: 5,
+            topK: 8,
             includeMetadata: true,
         });
         console.log(queryResponse);
