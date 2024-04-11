@@ -11,7 +11,7 @@ const openai = new OpenAI({
 export async function POST(req: Request) {
     const { messages } = await req.json();
     let message=""
-    const question = messages[messages.length - 1].content+"in this college";
+    const question = messages[messages.length - 1].content+" "+"in this college";
     console.log("question" + question);
     try {
         let content = await Match(question);
