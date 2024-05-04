@@ -49,6 +49,20 @@ function split(str: string, chunkSize: number) {
 
 export async function Getstring(formdata: FormData) {
     const file = formdata.get("file") as File;
+    if(file.size==0 ){
+        return {
+            ERROR: "No file selected",
+        };
+    }
+    else if(file.type!="text/plain"){
+        return {
+            ERROR: "Invalid file type. You can only upload text files.",
+        };
+    }
+
+    else{
+
+    
     const blob = new Blob([file], { type: "text/plain" });
     const buffer = Buffer.from(await blob.arrayBuffer());
     let ids=await Getid();
@@ -64,6 +78,7 @@ export async function Getstring(formdata: FormData) {
     } catch (err) {
         console.error(err);
     }
+
 
     const command = new GetObjectCommand({
         Bucket: "chat-pdf-rk",
@@ -96,11 +111,14 @@ export async function Getstring(formdata: FormData) {
     } catch (err) {
         console.error(err);
     }
+    
+
     finally{
         await setDoc(doc(db, "allowlist", "e0HAWON71Tr6gqfp3EHy"), {
             id:ids,
           }, { merge: true });
     }
+}
     return {
         message: "success",
     };

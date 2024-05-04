@@ -27,6 +27,7 @@ import { useToast } from "@/components/ui/use-toast"
 import { db } from "../firebase/firebase";
 import logo from "../../components/rit.png";
 import Loadingbtn from "@/components/loadbtn";
+import { text } from "stream/consumers";
 
 export default function Admin() {
   const auth = getAuth(app);
@@ -106,7 +107,7 @@ export default function Admin() {
       toast({ description: "successfully uploaded", variant: "success" });
     }
     else {
-      toast({ description: "error in uploading", variant: "destructive" });
+      toast({ title:"Error Adding",description: data.ERROR, variant: "destructive" });
     }
   }
 
@@ -199,7 +200,7 @@ export default function Admin() {
                     Choose the text file of the college data to upload
                   </div>
                   <form action={uploadfile} className="flex flex-col items-center justify-center">
-                    <Input id="picture" type="file" name="file" className="mb-4 w-64" />
+                    <Input id="picture" type="file" name="file" required accept="text/plain" className="mb-4 w-64" />
                     <Loadingbtn content={"upload file"} />
                   </form>
                 </>
