@@ -37,6 +37,5 @@ export async function POST(req: Request) {
         
     } catch (error) {
         console.log("error calling openai embeddings api", error);
-        return NextResponse.json({ error: "Error calling OpenAI API" });
     }
 }

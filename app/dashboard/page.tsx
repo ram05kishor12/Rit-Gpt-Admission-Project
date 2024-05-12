@@ -9,12 +9,20 @@ import { CircleSlash2 } from "lucide-react";
 import { useRef, useEffect, Key } from "react";
 import ChatContext from "@/components/chatprovider";
 import { useContext } from "react";
+import { useToast } from "../../components/ui/use-toast"
 
 const Home: React.FC = () => {
-    const { messages, input, handleInputChange, handleSubmit, isLoading, stop } = useContext(ChatContext);
+    const { messages, input, handleInputChange, handleSubmit, isLoading, stop,error } = useContext(ChatContext);
+    const { toast } = useToast();
 
+useEffect(() => {
+    if (error) {
+       toast({ title:"Error",description:error.toString(),variant:"destructive" })
+    }
+}
+, [error]);
     const chatContainerRef = useRef<HTMLDivElement>(null);
-
+     
 
     useEffect(() => {
         // Scroll to the bottom of the chat container whenever messages change
