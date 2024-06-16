@@ -36,41 +36,80 @@ useEffect(() => {
         // Split the response into paragraphs based on double line breaks
         const paragraphs: string[] = response.split("\n\n");
 
+        const renderFormattedText = (text: string, index: number) => {
+            if (text.includes("**")) {
+                // Handle bold text
+                const parts = text.split("**");
+                return (
+                    <p key={index}>
+                        {parts.map((part, i) => {
+                            if (i % 2 === 1) {
+                                return <strong key={i}>{part}</strong>;
+                            }
+                            return part;
+                        })}
+                    </p>
+                );
+            } else if (text.match(/^\d+\.\s/)) {
+                // Handle ordered lists
+                const lines = text.split("\n");
+                return (
+                    <ol key={index}>
+                        {lines.map((line, lineIndex) => (
+                            <li key={lineIndex}>{line.replace(/^\d+\.\s/, '')}</li>
+                        ))}
+                    </ol>
+                );
+            } else if (text.startsWith("- ")) {
+                // Handle unordered lists
+                const lines = text.split("\n");
+                return (
+                    <ul key={index}>
+                        {lines.map((line, lineIndex) => (
+                            <li key={lineIndex}>{line.replace(/^- /, '')}</li>
+                        ))}
+                    </ul>
+                );
+            } else if (text.startsWith("<") && text.endsWith(">")) {
+                // Handle JSX
+                return (
+                    <div key={index} dangerouslySetInnerHTML={{ __html: text }} />
+                );
+            } else if (text.startsWith("|") && text.endsWith("|")) {
+                // Handle tables
+                const rows = text.split("\n");
+                const headers = rows[0].split("|").filter(Boolean);
+                const data = rows.slice(1).map(row => row.split("|").filter(Boolean));
+    
+                return (
+                    <table key={index}>
+                        <thead>
+                            <tr>
+                                {headers.map((header, headerIndex) => (
+                                    <th key={headerIndex}>{header.trim()}</th>
+                                ))}
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {data.map((row, rowIndex) => (
+                                <tr key={rowIndex}>
+                                    {row.map((cell, cellIndex) => (
+                                        <td key={cellIndex}>{cell.trim()}</td>
+                                    ))}
+                                </tr>
+                            ))}
+                        </tbody>
+                    </table>
+                );
+            } else {
+                // Handle regular paragraphs
+                return <p key={index}>{text}</p>;
+            }
+        };
+    
         return (
             <div>
-                {paragraphs.map((paragraph: string, index: number) => {
-                    if (paragraph.includes("**")) {
-                        // Check if the paragraph contains '**' to denote bold text
-                        // Split the paragraph based on '**' to get parts before, between, and after bold text
-                        const parts: string[] = paragraph.split("**");
-
-                        // Map over the parts to render them accordingly
-                        return (
-                            <p key={index}>
-                                {parts.map((part: string, i: number) => {
-                                    // If part index is odd, render it as bold text
-                                    if (i % 2 === 1) {
-                                        return <strong key={i}>{part}</strong>;
-                                    }
-                                    return part;
-                                })}
-                            </p>
-                        );
-                    } else if (paragraph.match(/^\d+\.\s/)) {
-                        // Check if the paragraph starts with a number followed by a dot and a space
-                        const lines: string[] = paragraph.split("\n");
-                        return (
-                            <ol key={index}>
-                                {lines.map((line, lineIndex) => (
-                                    <li key={lineIndex}>{line}</li>
-                                ))}
-                            </ol>
-                        );
-                    } else {
-                        // Render regular paragraph if no bold formatting is found and not numbered lines
-                        return <p key={index}>{paragraph}</p>;
-                    }
-                })}
+                {paragraphs.map((paragraph, index) => renderFormattedText(paragraph, index))}
             </div>
         );
     };

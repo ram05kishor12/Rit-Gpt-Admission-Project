@@ -50,8 +50,8 @@ export default function Home() {
       <Navbar cont={true} admin={false} />
       <div className=" min-h-screen bg-gradient-to-r from-gray-100 via-blue-100 to-blue-300">
 
-        <div className="flex w-full justify-center items-center h-screen">
-          <Card className="p-3">
+        <div className="flex w-full justify-center items-center h-screen px-20">
+          <Card className="p-3 w-[400px] ">
             <CardHeader>
               <CardTitle>Login</CardTitle>
               <CardDescription>login using your email Id</CardDescription>

@@ -48,7 +48,7 @@ function Sidebar() {
       <div className="p-2.5 mt-1 flex items-center rounded-md px-5 duration-300 cursor-pointer hover:px-8" >
         <i className="bi bi-house-door-fill"></i>
         <form onSubmit={handleSubmit}>
-          <button className="text-[14px] ml-4 text-black font-bold" onClick={(e) => { setInput("courses offered in Rajalakshmi Institute of Technology"); }} type="submit">
+          <button className="text-[14px] ml-4 text-black font-bold" onClick={(e) => { setInput("courses offered "); }} type="submit">
             Courses Offered
           </button>
         </form>
