@@ -13,7 +13,7 @@ export async function Match(question: string) {
         const vectors = await GetEmbeddings(question);
         const queryResponse = await namespace.query({
             vector: vectors,
-            topK: 8,
+            topK: 3,
             includeMetadata: true,
         });
         console.log(queryResponse);
@@ -21,7 +21,7 @@ export async function Match(question: string) {
             data: string;
         };
         const qualify = queryResponse.matches.filter(
-            (match) => match.score && match.score > 0.74
+            (match) => match.score && match.score > 0.71
         );
 
         const content = qualify.map((match) => match.metadata as Metadata);

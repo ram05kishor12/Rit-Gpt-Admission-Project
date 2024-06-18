@@ -200,7 +200,7 @@ export default function Admin() {
                     Choose the text file of the college data to upload
                   </div>
                   <form action={uploadfile} className="flex flex-col items-center justify-center">
-                    <Input id="picture" type="file" name="file" required accept="text/plain" className="mb-4 w-64" />
+                    <Input id="picture" type="file" name="file" required accept="text/plain" className="mb-4 w-64" multiple />
                     <Loadingbtn content={"upload file"} />
                   </form>
                 </>

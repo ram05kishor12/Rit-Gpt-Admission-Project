@@ -48,13 +48,16 @@ function split(str: string, chunkSize: number) {
 }
 
 export async function Getstring(formdata: FormData) {
-    const file = formdata.get("file") as File;
-    if(file.size==0 ){
+    const file = formdata.getAll("file") as File[];
+    for(const files of file){
+
+    
+    if(files.size==0 ){
         return {
             ERROR: "No file selected",
         };
     }
-    else if(file.type!="text/plain"){
+    else if(files.type!="text/plain"){
         return {
             ERROR: "Invalid file type. You can only upload text files.",
         };
@@ -63,13 +66,13 @@ export async function Getstring(formdata: FormData) {
     else{
 
     
-    const blob = new Blob([file], { type: "text/plain" });
+    const blob = new Blob([files], { type: "text/plain" });
     const buffer = Buffer.from(await blob.arrayBuffer());
     let ids=await Getid();
 
     const commands = new PutObjectCommand({
         Bucket: "chat-pdf-rk",
-        Key: `uploads/${file.name}`,
+        Key: `uploads/${files.name}`,
         Body: buffer,
     });
     try {
@@ -82,7 +85,7 @@ export async function Getstring(formdata: FormData) {
 
     const command = new GetObjectCommand({
         Bucket: "chat-pdf-rk",
-        Key: `uploads/${file.name}`,
+        Key: `uploads/${files.name}`,
     });
 
     try {
@@ -92,7 +95,7 @@ export async function Getstring(formdata: FormData) {
         }
         const str = (await response.Body?.transformToString()) as string;
         console.log(str);
-        const chunks = split(str, 1000);
+        const chunks = split(str, 4000);
         for (const chunk of chunks) {
             const embedding = await GetEmbeddings(chunk);
             console.log(embedding);
@@ -119,6 +122,7 @@ export async function Getstring(formdata: FormData) {
           }, { merge: true });
     }
 }
+    }
     return {
         message: "success",
     };
