@@ -19,7 +19,7 @@ function Sidebar() {
   const { handleSubmit, setInput } = useContext(ChatContext);
 
   return (
-    <div className="sidebar h-screen overflow-x-auto w-300px md:w-[300px] lg:w-[300px] overflow-y-auto text-center bg-blue-50   shadow-sm">
+    <div className="sidebar h-screen overflow-x-auto w-300px md:w-[300px] lg:w-[300px] overflow-y-auto text-center bg-gray-50   shadow-sm">
       <Image
         className="mx-5 mt-5 rounded-md"
         src={Logo}
