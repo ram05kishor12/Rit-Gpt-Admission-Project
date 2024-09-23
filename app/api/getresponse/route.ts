@@ -3,6 +3,7 @@ import OpenAI from "openai";
 import { Match } from "../../actions/route3";
 import { NextResponse } from "next/server";
 import { OpenAIStream, StreamingTextResponse } from "ai";
+import Error from "next/error";
 
 const openai = new OpenAI({
     apiKey: process.env.OPENAI_API_KEY,
@@ -25,7 +26,7 @@ export async function POST(req: Request) {
           
             const response = await openai.chat.completions.create({
                 messages: [{ role: "system", content: "you are an chatbot desgined to answer to questions regarding Rajalakshmi Institute of Technology(rit)" }, { role: "user", content: "i will provide you a content.you should respond only from it. if the content doesnt contains any information about the question,pls dont answer..content:"+message+"question is:"+question }],
-                model: "gpt-3.5-turbo",
+                model: "gpt-4o-mini",
                 stream: true,
                 temperature:0.9,
             });
@@ -35,7 +36,8 @@ export async function POST(req: Request) {
             // Respond with the stream
             return new StreamingTextResponse(stream);
         
-    } catch (error) {
-        console.log("error calling openai embeddings api", error);
+    } catch (error:any) {
+       const stream = OpenAIStream(error);
+        return new StreamingTextResponse(stream);
     }
 }

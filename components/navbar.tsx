@@ -28,7 +28,7 @@ function Navbar({ cont, admin }: { cont: boolean, admin: boolean }) {
 
     return (
         <>
-            <div className="flex items-center  bg-white p-2 ">
+            <div className="flex items-center  bg-white p-2">
                 {!cont && (<MobileSidebar />)}
                 <div className="flex justify-center px-8 md:justify-start xl:justify-start lg:justify-start w-full md:w-auto">
                     <h1 className=" flex text-2xl px-5 text-slate-900 font-semibold">RIT <span className="text-blue-600 px-2">GPT</span></h1>
