@@ -14,8 +14,7 @@ import { useToast } from "../../components/ui/use-toast"
 const Home: React.FC = () => {
     const { messages, input, handleInputChange, handleSubmit, isLoading, stop,error } = useContext(ChatContext);
     const { toast } = useToast();
-    console.log(messages.length)
-
+   
 useEffect(() => {
     if (error) {
        toast({ title:"Error",description:error.toString(),variant:"destructive" })

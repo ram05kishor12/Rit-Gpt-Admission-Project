@@ -13,10 +13,10 @@ export async function POST(req: Request) {
     const { messages } = await req.json();
     let message=""
     const question = messages[messages.length - 1].content;
-    console.log("question" + question);
+
     try {
         let content = await Match(question);
-        console.log("content" + content);
+       
         if (content.includes("invalid")) {
              message=" respond that I am sorry, I cannot respond to this question as i have been trained to respond only to Rajalakshmi Insititue of Technology admission enquiries. Please ask a valid question."
         }
@@ -30,7 +30,7 @@ export async function POST(req: Request) {
                 stream: true,
                 temperature:0.9,
             });
-            console.log(response);
+          
             const stream = OpenAIStream(response);
             
             // Respond with the stream

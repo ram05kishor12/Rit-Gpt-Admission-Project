@@ -77,9 +77,9 @@ export async function Getstring(formdata: FormData) {
     });
     try {
         const response = await client.send(commands);
-        console.log(response);
+       
     } catch (err) {
-        console.error(err);
+       
     }
 
 
@@ -91,28 +91,27 @@ export async function Getstring(formdata: FormData) {
     try {
         const response = await client.send(command);
         if (!response) {
-            console.log("No response");
+           
         }
         const str = (await response.Body?.transformToString()) as string;
-        console.log(str);
+        
         const chunks = split(str, 4000);
         for (const chunk of chunks) {
             const embedding = await GetEmbeddings(chunk);
-            console.log(embedding);
+           
             try {
                 await namespace.upsert([
                     { id: ids.toString(), values: embedding, metadata: { data: chunk } },
                 ]);
                 ids++;
-                console.log(ids);
-                console.log("done");
+               
             } catch (error) {
-                console.log("error occurred" + error);
+               
             }
-            console.log("chunk:" + chunk);
+            
         }
     } catch (err) {
-        console.error(err);
+        
     }
     
 

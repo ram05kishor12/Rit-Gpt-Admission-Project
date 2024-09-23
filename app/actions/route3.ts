@@ -16,7 +16,7 @@ export async function Match(question: string) {
             topK: 8,
             includeMetadata: true,
         });
-        console.log(queryResponse);
+       
         type Metadata = {
             data: string;
         };
@@ -35,7 +35,7 @@ export async function Match(question: string) {
         }, "");
 
         if (!dataString) {
-            console.log("empty succeded");
+           
             return "invalid";
         } else {
             return dataString;

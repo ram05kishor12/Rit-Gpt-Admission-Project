@@ -42,9 +42,9 @@ export default function Admin() {
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       if (!user) {
-        console.log("user is not signed in +3");
+       
       } else {
-        console.log("usseffect" + auth.currentUser?.uid);
+      
       }
       setLoading(false);
     });
@@ -70,10 +70,10 @@ export default function Admin() {
 
   async function signout() {
     await signOut(auth).then(() => {
-      console.log("user is signed out")
+    
       Router.push("/")
     }).catch((error) => {
-      console.log("user is not signed out")
+      
     });
   }
 
@@ -81,12 +81,11 @@ export default function Admin() {
     try {
       setbtnloading(true);
       if (auth.currentUser != null) {
-        console.log("current uid" + auth.currentUser.uid);
-        console.log(auth.currentUser.email);
+       
         const data = await getDoc(doc(db, "allowlist", "CECgg7h8hKr4f2nqdvUd"));
-        console.log(data.data());
+        
         const persons = data.data()?.person;
-        console.log(persons);
+        
         await setDoc(doc(db, "allowlist", "CECgg7h8hKr4f2nqdvUd"), {
           person: [...persons, email],
         }, { merge: true });
@@ -97,7 +96,7 @@ export default function Admin() {
         setbtnloading(false);
       }
     } catch (error: any) {
-      console.error("Error adding document: ", error);
+
       toast({ description: error.message, variant: "destructive" });
     }
   }

@@ -33,7 +33,7 @@ export default function Home() {
     try {
       await setPersistence(auth, browserLocalPersistence);
       await signInWithEmailAndPassword(auth, email, password);
-      console.log("User is signed in");
+     
       router.push("/admin");
       setLoading(false);
 
@@ -41,7 +41,7 @@ export default function Home() {
       const errorCode = error.code;
       const errorMessage = error.message;
       setLoading(false);
-      console.error("Error signing in:", errorCode, errorMessage);
+     
       toast({ description: errorMessage, variant: "destructive" })
     }
   }
