@@ -74,3 +74,69 @@
     transform: translateY(0);
   }
 }
+
+/* Tailwind utilities are added directly in the component classes */
+.formatted-text h1 {
+  @apply text-4xl font-bold mb-8;
+}
+
+.formatted-text li{
+  @apply mb-2;
+}
+
+.formatted-text h2 {
+  @apply text-3xl font-bold mb-8;
+}
+
+.formatted-text h3 {
+  @apply text-xl font-bold mb-4;
+}
+
+.formatted-text h4 {
+  @apply text-xl font-bold mb-4;
+}
+
+.formatted-text p {
+  @apply text-base mb-4 ;
+}
+
+.formatted-text pre {
+  @apply bg-gray-100 p-4 rounded-md overflow-x-auto mb-4;
+}
+
+.formatted-text code {
+  @apply bg-gray-200 p-1 rounded-sm font-mono;
+}
+
+.formatted-text ul, .formatted-text ol {
+  @apply mt-2 mb-4 ;
+}
+
+.formatted-text blockquote {
+  @apply border-l-4 border-gray-500 pl-4 italic mb-4;
+}
+
+.formatted-text table {
+  @apply w-full border-collapse border border-gray-300 mb-4;
+}
+
+.formatted-text th {
+  @apply bg-gray-200 font-bold border border-gray-300;
+}
+
+.formatted-text td {
+  @apply border border-gray-300 p-2;
+}
+
+.formatted-text tr:nth-child(even) {
+  @apply bg-gray-100;
+}
+
+.formatted-text hr {
+  @apply border-t border-gray-300 my-4;
+}
+.formatted-text strong {
+  @apply font-bold text-xl ;
+}
+
+

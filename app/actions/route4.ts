@@ -47,6 +47,62 @@ function split(str: string, chunkSize: number) {
     return chunks;
 }
 
+
+// function splitTextIntoChunks(text, wordLimit) {
+//     const lines = text.split('\n');
+//     let chunks = [];
+//     let currentChunk = '';
+//     let heading = '';
+//     let subheading = '';
+//     let wordsInChunk = [];
+  
+//     lines.forEach(line => {
+//       const words = line.split(/\s+/);
+  
+//       if (line.startsWith('##')) {
+//         subheading = line.replace(/^##\s*/, '');
+//       } else if (line.startsWith('#')) {
+//         heading = line.replace(/^#\s*/, '');
+//         subheading = '';
+//       } else {
+//         words.forEach(word => {
+//           wordsInChunk.push(word);
+//           if (wordsInChunk.length === wordLimit) {
+//             let chunk = heading;
+//             if (subheading) chunk += ` ${subheading}`;
+//             chunk += ' ' + wordsInChunk.join(' ');
+  
+//             chunks.push(chunk.trim());
+//             wordsInChunk = [];
+//           }
+//         });
+//       }
+//     });
+  
+//     if (wordsInChunk.length > 0) {
+//       let chunk = heading;
+//       if (subheading) chunk += ` ${subheading}`;
+//       chunk += ' ' + wordsInChunk.join(' ');
+//       chunks.push(chunk.trim());
+//     }
+  
+//     return chunks;
+//   }
+  
+//   const text = `
+//   # About
+//   Rajalakshmi Institute of Technology was established in 2008. RIT is accredited with highest grade of A++ by NAAC. RIT is affiliated with Anna University Chennai. It is one of the AICTE-approved colleges in Chennai New Delhi, and also offers NBA-approved courses.
+//   ## Moreabout 
+//   The infrastructure is quite good. They offer core courses like, Mechanical, EEE, ECE and CSE. The faculties are very friendly. 
+//   # Heading 2
+//   This is text for heading 2.
+//   `;
+  
+//   const wordLimit = 5;
+//   const result = splitTextIntoChunks(text, wordLimit);
+//   console.log(result);
+  
+
 export async function Getstring(formdata: FormData) {
     const file = formdata.getAll("file") as File[];
     for(const files of file){
